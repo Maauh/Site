@@ -17,13 +17,13 @@
       <a class="navbar-brand" href="index.html">Wall-E</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="index.html">Home</a></li>
+      <li><a href="index.html">Home</a></li>
       <li><a href="info.html">ROBO CUP</a></li>
       <li><a href="historia.html">História do Robo</a></li>
       <li><a href="sobrenos.html">Sobre Nos</a></li>
-      <li><a href="#">Diversao</a></li>
+      <li class="active"><a href="#">Diversao</a></li>
+      <button class="btn btn-danger navbar-btn">Game</button>
     </ul>
-    <button class="btn btn-danger navbar-btn">Game</button>
     <form class="navbar-form navbar-left" action="/action_page.php">
       <div class="form-group">
         <input type="text" class="form-control" placeholder="Search">
@@ -33,17 +33,15 @@
   </div>
 </nav>
   
-<div class="container">
-  <h1>JOGO</h1>
+<div class="container_diversao">
+  <h1>VIRUZ TD!</h1>
   <p></p>
-  <h3>O RoboCup é a competição mais antiga da FIAP. Alunos dos 1°s anos de Sistemas de Informação construíram robôs para participar de duelos,
-    onde o principal objetivo é estourar o balão que o adversário carrega. 
-    Para isso, todas as máquinas possuem armas em seu corpo. 
-    Mas a competição também exige o funcionamento pleno do robô: após estourar o balão do oponente, ele deve recolher sua arma, só assim é considerado o vencedor. 
-    Os grupos ganhadores foram:</h3>
+  <h3>como jogar</h3>
   <p></p>
-  <h3>1º lugar: Primeira Mente – Evandro Ezaki, Hálex Tarouco Tomasi, Matheus das M. S. Bezerra, Rodrigo Costa Paim e Wendel Orti Guirao.</h3>            
-  <img class="img-responsive" src="robocup.jpg" alt="RoboCup" width="683" height="436">
+    <canvas id="canvas" width="1000" height="720" style="border: #000000 solid 1px"></canvas>
+    <footer>
+        <h5>Copyright &copy; 2018 - Todos os Direitos Reservados. Criação e implementação Grupo Potatoes Party.</h5>
+    </footer>
 </div>
 </body>
 </html>
