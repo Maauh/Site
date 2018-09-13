@@ -16,7 +16,20 @@
     border: solid 1px black;
     box-shadow: 0px 0px 40px 10px white;
 }
-.container_diversao {
+
+.container h3{  
+        font-style: italic;
+        font-size: 20px;
+        font-family: arial, sans-serif;
+} 
+.container h1{  
+    font-style: italic;
+    font-weight: bold;
+    font-family: arial, sans-serif;
+} 
+
+
+  .container_diversao {
     padding: 30px;
     margin: 0 auto;
     margin-bottom: 1%;
@@ -29,8 +42,10 @@
     box-shadow: 0px 0px 40px 10px white;
 }
 .container img{
+    padding-top: 50px;
     margin: 0 auto;
 }
 .container footer{
+    padding-top: 50px;
     margin: 0 auto;
 }
