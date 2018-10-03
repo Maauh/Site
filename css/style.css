@@ -4,7 +4,6 @@
  .container-fluid {
     display: flex;
     justify-content: center;
-    
  }
 .container {
     padding: 30px;
@@ -18,7 +17,11 @@
     border: solid 1px black;
     box-shadow: 0px 0px 40px 10px white;
 }
-
+.navbar{
+    margin: 0px;
+    border: solid 1px black;
+    margin-bottom: -1px;
+}
 .container h3{  
         font-style: italic;
         font-size: 20px;
@@ -28,10 +31,8 @@
     font-style: italic;
     font-weight: bold;
     font-family: arial, sans-serif;
-} 
-
-
-  .container_diversao {
+}
+.container_diversao {
     padding: 30px;
     margin: 0 auto;
     margin-bottom: 1%;
@@ -70,4 +71,22 @@
 .video{
     width: 200px;
     height: 200px;
+}
+.perfil-sobre-nos{
+    max-width: 400px;
+    padding: 1%;
+    margin: 0 auto;
+}
+.perfil-sobre-nos div{
+    margin: 0 auto;
+    padding: 4px;
+    text-align: center;
+}
+.perfil-sobre-nos div img{
+    margin: 0 auto; 
+    border: solid 1px black;
+    box-shadow: 0px 0px 250px 1px #000;
+}
+.product .img-responsive {
+    margin: 0 auto;
 }
