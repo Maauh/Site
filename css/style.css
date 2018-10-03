@@ -22,15 +22,16 @@
     border: solid 1px black;
     margin-bottom: -1px;
 }
-.container h3{  
-        font-style: italic;
-        font-size: 20px;
-        font-family: arial, sans-serif;
+h1, h2, h3, h4, h5, h6, p{
+    font-style: italic;
+    font-family: arial, sans-serif;
+}
+h3{  
+    font-size: 20px;
 } 
-.container h1{  
+h1{  
     font-style: italic;
     font-weight: bold;
-    font-family: arial, sans-serif;
 }
 .container_diversao {
     padding: 30px;
