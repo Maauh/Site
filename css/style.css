@@ -1,9 +1,10 @@
 .background {
     background: black url("..//imagem/background1.jpg") repeat right top;
  }
- .navbar {
-    margin: 0px;
-    text-align: center;
+ .container-fluid {
+    display: flex;
+    justify-content: center;
+    
  }
 .container {
     padding: 30px;
@@ -51,10 +52,19 @@
 .container footer{
     padding-top: 50px;
     margin: 0 auto;
+    clear: both;
+    
+   
 }
 .video{
     margin: 0 auto;
     width: 200px;
     height: 200px;
+}
+.img1{
+    float: left;
+}
+.img2{
+    float: right;
 }
 
