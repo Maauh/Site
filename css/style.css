@@ -67,4 +67,7 @@
 .img2{
     float: right;
 }
-
+.video{
+    width: 200px;
+    height: 200px;
+}
