@@ -172,7 +172,7 @@ function RenderTextArray(top_pos, size, texts)
         RenderText(center, text, size.x);
     }
 }
-function SetProperty(o, name, get, set = undefined)
+function AddProperty(o, name, get, set = undefined)
 {
     Object.defineProperty(o, name, {
         get: get,
@@ -322,40 +322,42 @@ let sprites =
 {
     spider:
     [
-        Sprite.CreateSheet("images/enemies/spider_d_", 4, ".png"),
-        Sprite.CreateSheet("images/enemies/spider_c_", 4, ".png"),
-        Sprite.CreateSheet("images/enemies/spider_b_", 4, ".png"),
-        Sprite.CreateSheet("images/enemies/spider_a_", 4, ".png"),
-        Sprite.CreateArray("images/enemies/spider_d_0.png", "images/enemies/spider_c_1.png", "images/enemies/spider_b_0.png", "images/enemies/spider_a_1.png")
+        Sprite.CreateSheet("imagem/enemies/spider_d_", 4, ".png"),
+        Sprite.CreateSheet("imagem/enemies/spider_c_", 4, ".png"),
+        Sprite.CreateSheet("imagem/enemies/spider_b_", 4, ".png"),
+        Sprite.CreateSheet("imagem/enemies/spider_a_", 4, ".png"),
+        Sprite.CreateArray("imagem/enemies/spider_d_0.png", "imagem/enemies/spider_c_1.png", "imagem/enemies/spider_b_0.png", "imagem/enemies/spider_a_1.png")
     ],
     beetle:
     [
-        Sprite.CreateSheet("images/enemies/beetle_d_", 2, ".png"),
-        Sprite.CreateSheet("images/enemies/beetle_c_", 2, ".png"),
-        Sprite.CreateSheet("images/enemies/beetle_b_", 2, ".png"),
-        Sprite.CreateSheet("images/enemies/beetle_a_", 2, ".png"),
-        Sprite.CreateArray("images/enemies/beetle_d_0.png", "images/enemies/beetle_c_1.png", "images/enemies/beetle_b_0.png", "images/enemies/beetle_a_1.png")
+        Sprite.CreateSheet("imagem/enemies/beetle_d_", 2, ".png"),
+        Sprite.CreateSheet("imagem/enemies/beetle_c_", 2, ".png"),
+        Sprite.CreateSheet("imagem/enemies/beetle_b_", 2, ".png"),
+        Sprite.CreateSheet("imagem/enemies/beetle_a_", 2, ".png"),
+        Sprite.CreateArray("imagem/enemies/beetle_d_0.png", "imagem/enemies/beetle_c_1.png", "imagem/enemies/beetle_b_0.png", "imagem/enemies/beetle_a_1.png")
     ],
     wasp:
     [
-        Sprite.CreateSheet("images/enemies/wasp_d_", 5, ".png"),
-        Sprite.CreateSheet("images/enemies/wasp_c_", 5, ".png"),
-        Sprite.CreateSheet("images/enemies/wasp_b_", 5, ".png"),
-        Sprite.CreateSheet("images/enemies/wasp_a_", 5, ".png"),
-        Sprite.CreateArray("images/enemies/wasp_d_0.png", "images/enemies/wasp_c_1.png", "images/enemies/wasp_b_2.png", "images/enemies/wasp_a_3.png", "images/enemies/wasp_a_4.png")
+        Sprite.CreateSheet("imagem/enemies/wasp_d_", 5, ".png"),
+        Sprite.CreateSheet("imagem/enemies/wasp_c_", 5, ".png"),
+        Sprite.CreateSheet("imagem/enemies/wasp_b_", 5, ".png"),
+        Sprite.CreateSheet("imagem/enemies/wasp_a_", 5, ".png"),
+        Sprite.CreateArray("imagem/enemies/wasp_d_0.png", "imagem/enemies/wasp_c_1.png", "imagem/enemies/wasp_b_2.png", "imagem/enemies/wasp_a_3.png", "imagem/enemies/wasp_a_4.png")
     ],
-    machine_gun: Sprite.CreateArray("images/turrets/machine_gun_0.png", "images/turrets/machine_gun_1.png", "images/turrets/machine_gun_2.png", "images/turrets/machine_gun_enabled.png", "images/turrets/machine_gun_disabled.png"),
-    laser_gun: Sprite.CreateSheet("images/turrets/p_laser_gun_", 3, ".png"),
-    anti_air: Sprite.CreateArray("images/turrets/antiair.png", "images/turrets/antiair_enabled.png", "images/turrets/antiair_disabled.png"),
-    rocket_launcher: Sprite.CreateArray("images/turrets/rocket_launcher.png", "images/turrets/rocket_launcher_enabled.png", "images/turrets/rocket_launcher_disabled.png"),
-    base: Sprite.CreateArray("images/turrets/base.png", "images/turrets/base_enabled.png", "images/turrets/base_disabled.png"),
-    rocket: new Sprite("images/projectiles/rocket/0.png"),
-    bullet: new Sprite("images/projectiles/bullet/0.png"),
-    explosion: Sprite.CreateArray("images/effects/tile000.png", "images/effects/tile001.png", "images/effects/tile002.png", "images/effects/tile003.png","images/effects/tile004.png"),
-    explosion_realistic: Sprite.CreateSheet("images/effects/realexplosion/", 27, ".png"),
-    grass: new Sprite("images/background/grass.jpg"),
-    paths: Sprite.CreateSheet("images/background/Track", 3,".png"),
-    menu_background: new Sprite("images/background/menu.png"),
+    machine_gun: Sprite.CreateArray("imagem/turrets/machine_gun_0.png", "imagem/turrets/machine_gun_1.png", "imagem/turrets/machine_gun_2.png", "imagem/turrets/machine_gun_enabled.png", "imagem/turrets/machine_gun_disabled.png"),
+    laser_gun: Sprite.CreateSheet("imagem/turrets/p_laser_gun_", 3, ".png"),
+    anti_air: Sprite.CreateArray("imagem/turrets/antiair.png", "imagem/turrets/antiair_enabled.png", "imagem/turrets/antiair_disabled.png"),
+    rocket_launcher: Sprite.CreateArray("imagem/turrets/rocket_launcher.png", "imagem/turrets/rocket_launcher_enabled.png", "imagem/turrets/rocket_launcher_disabled.png"),
+    mini_gun: Sprite.CreateSheet("imagem/turrets/mini_gun_", 2, ".png"),
+    base: Sprite.CreateArray("imagem/turrets/base.png", "imagem/turrets/base_enabled.png", "imagem/turrets/base_disabled.png"),
+    rocket: new Sprite("imagem/projectiles/rocket.png"),
+    bullet: new Sprite("imagem/projectiles/bullet.png"),
+    laser_beam: new Sprite("imagem/Projectiles/laser.png"),
+    explosion: Sprite.CreateArray("imagem/effects/tile000.png", "imagem/effects/tile001.png", "imagem/effects/tile002.png", "imagem/effects/tile003.png","imagem/effects/tile004.png"),
+    explosion_realistic: Sprite.CreateSheet("imagem/effects/realexplosion/", 27, ".png"),
+    grass: new Sprite("imagem/background/grass.jpg"),
+    paths: Sprite.CreateSheet("imagem/background/Track", 4,".png"),
+    menu_background: new Sprite("imagem/background/menu.png"),
 }
 class Entity extends Transformable
 {
@@ -474,10 +476,9 @@ let animations =
     spider: Animation.CreateArray(12, sprites.spider),
     beetle: Animation.CreateArray(12, sprites.beetle),
     wasp: Animation.CreateArray(30, sprites.wasp),
-    machine_gun: new Animation(12, sprites.machine_gun),
-    anti_air: new Animation(12, sprites.anti_air),
     explosion: new Animation(30, sprites.explosion),
     explosion_realistic: new Animation(120, sprites.explosion_realistic),
+    mini_gun: new Animation(5, sprites.mini_gun),
 }
 class KillableEntity extends Entity
 {
@@ -659,8 +660,9 @@ class EnemyFactory
         e.type = this.type;
         e.path = path;
         e.name = this.name;
+        e.rank = rank;
         e.gold = 3 * (rank + 1);
-        SetProperty(e, "info", function() {
+        AddProperty(e, "info", function() {
             return [this.name + "-" + (rank != 4 ? rank != 3 ? rank != 2 ? rank != 1 ? "D" : "C" : "B" : "A" : "S"),
             "Vida: " + this.life + " de " + this.max_life,
             "Tipo: " + this.type,
@@ -706,6 +708,7 @@ class Projectile extends Entity
         this.aoe = aoe;
         this.speed = speed;
         this.main_target = main_target;
+        this.render_layer = 1;
     }
     get copy() { return new Projectile(this.aoe, this.speed, this.main_target, this.transform); }
     Update()
@@ -725,7 +728,7 @@ class Projectile extends Entity
     }
     Render()
     {
-        RenderRectangleFilled("#F00", this.transform.position, vec(25, 25));
+        RenderRectangleFilled("#F00", this.transform.position, vec(5, 5));
     }
     OnHit(targets)
     {
@@ -885,6 +888,86 @@ class Turret extends Entity
         context.restore();
     }
 }
+class LaserGun extends Turret
+{
+    constructor(transform = new Transform())
+    {
+        super(8, 195, transform);
+        this.sprite_sheet = sprites.laser_gun;
+        this.bullet_sprite = sprites.laser_beam;
+        this.left = false;
+        this.transform.scale = .5;
+        this.upgrades.Alcance.max_level = 1;
+        this.upgrades.Dano = new Upgrade(60, 5);
+        this.upgrades.Ricochetes = new Upgrade(1, 4, 1);
+        this.bullet_aoe = 70;
+        this.bullet_speed = 500;
+        this.name = "Arma de Laser";
+        this.cost = 120;
+    }
+    get copy() { return new LaserGun(this.transform); }
+    get chains() { return this.upgrades.Ricochetes.value; }
+    get damage() { return this.upgrades.Dano.value; }
+    get info() { return super.info.concat("Alvos: Rank B ou inferior", "Dano: " + this.damage, "Ricochetes: " + this.chains); }
+    get bullet_position() { return Vector2.add(this.transform.position, Vector2.angleVector(this.transform.rotation + (this.left ? -.5 : .5)).mult(30 * this.transform.scale)); }
+    get sprite() { return this.targets.length == 0 ? this.sprite_sheet[0] : this.left ? this.sprite_sheet[1] : this.sprite_sheet[2]; }
+    UpdateTargetsInRange()
+    {
+        super.UpdateTargetsInRange();
+        this.targets_in_range.remove_if(e => { return 2 < e.rank; });
+    }
+    Shoot()
+    {
+        this.left = !this.left;
+        this.manager.AddEntity(new Bullet(this.bullet_sprite, this.damage, this.chains, this.bullet_aoe, this.bullet_speed, this.target, trans(this.bullet_position, this.transform.rotation, this.transform.scale)));
+    }
+    Render()
+    {
+        super.Render();
+        this.sprite.transform = this.transform;
+        this.sprite.Render();
+    }
+
+}
+class MiniGun extends Turret
+{
+    constructor(transform = new Transform())
+    {
+        super(15, 250, transform);
+        this.transform.scale = .5;
+        this.name = "MiniGun";
+        this.cost = 120;
+        this.upgrades.Dano = new Upgrade(50, 5);
+        this.upgrades.Critico = new Upgrade(.15, 4, 1, 0);
+        this.bullet_speed = 850;
+        this.bullet_sprite = sprites.bullet;
+        this.anim = animations.mini_gun.copy;
+    }
+    get copy() { return new MiniGun(this.transform); }
+    get chains() { return this.upgrades.Ricochetes.value; }
+    get damage() { return this.upgrades.Dano.value; }
+    get info() { return super.info.concat("Alvos: Rank B ou superior", "Dano: " + this.damage, "Chance de Crítico: " + Math.ceil(this.crit * 100) + "%"); }
+    get bullet_position() { return Vector2.add(this.transform.position, Vector2.angleVector(this.transform.rotation).mult(30 * this.transform.scale)); }
+    get crit() { return this.upgrades.Critico.value; }
+    UpdateTargetsInRange()
+    {
+        super.UpdateTargetsInRange();
+        this.targets_in_range.remove_if(e => { return 2 > e.rank; });
+    }
+    Shoot()
+    {
+        this.manager.AddEntity(new Bullet(this.bullet_sprite, this.crit > Math.random() ? this.damage * 2 : this.damage, 0, 10, this.bullet_speed, this.target, trans(this.bullet_position, this.transform.rotation)));
+    }
+    Render()
+    {
+        super.Render();
+        this.anim.Update();
+        this.anim.transform = this.transform;
+        this.anim.transform.scale = this.transform.scale * 1.2;
+        if (!this.targets.length) this.anim.sprite_index = 0;
+        this.anim.Render();
+    }
+}
 class MachineGun extends Turret
 {
     constructor(transform = new Transform())
@@ -899,12 +982,18 @@ class MachineGun extends Turret
         this.bullet_speed = 700;
         this.name = "Metralhadora";
         this.cost = 80;
+        this.evolutions = [new LaserGun, new MiniGun];
     }
     get copy() { return new MachineGun(this.transform); }
     get damage() { return this.upgrades.Dano.value; }
-    get info() { return super.info.concat("Alvos: Aéreos e Terrestres", "Dano: " + this.damage); }
+    get info() { return super.info.concat("Alvos: Rank B ou inferior", "Dano: " + this.damage); }
     get bullet_position() { return Vector2.add(this.transform.position, Vector2.angleVector(this.transform.rotation + (this.left ? -.5 : .5)).mult(30 * this.transform.scale)); }
     get sprite() { return this.targets.length == 0 ? this.sprite_sheet[0] : this.left ? this.sprite_sheet[1] : this.sprite_sheet[2]; }
+    UpdateTargetsInRange()
+    {
+        super.UpdateTargetsInRange();
+        this.targets_in_range.remove_if(e => { return 2 < e.rank; });
+    }
     Shoot()
     {
         this.left = !this.left;
@@ -922,41 +1011,6 @@ class MachineGun extends Turret
         let sprite = sprites.machine_gun[b ? 3 : 4];
         sprite.transform = this.transform;
         sprite.Render();
-    }
-
-}
-class LaserGun extends Turret
-{
-    constructor(transform = new Transform())
-    {
-        super(5, 195, transform);
-        this.sprite_sheet = sprites.laser_gun;
-        this.bullet_sprite = sprites.bullet;
-        this.left = false;
-        this.transform.scale = .5;
-        this.upgrades.Dano = new Upgrade(60, 5);
-        this.upgrades.Ricochetes = new Upgrade(1, 3, 1);
-        this.bullet_aoe = 70;
-        this.bullet_speed = 500;
-        this.name = "Arma de Laser";
-        this.cost = 120;
-    }
-    get copy() { return new LaserGun(this.transform); }
-    get chains() { return this.upgrades.Ricochetes.value; }
-    get damage() { return this.upgrades.Dano.value; }
-    get info() { return super.info.concat("Alvos: Aéreos e Terrestres", "Dano: " + this.damage, "Ricochetes: " + this.chains); }
-    get bullet_position() { return Vector2.add(this.transform.position, Vector2.angleVector(this.transform.rotation + (this.left ? -.5 : .5)).mult(30 * this.transform.scale)); }
-    get sprite() { return this.targets.length == 0 ? this.sprite_sheet[0] : this.left ? this.sprite_sheet[1] : this.sprite_sheet[2]; }
-    Shoot()
-    {
-        this.left = !this.left;
-        this.manager.AddEntity(new Bullet(this.bullet_sprite, this.damage, this.chains, this.bullet_aoe, this.bullet_speed, this.target, trans(this.bullet_position, this.transform.rotation)));
-    }
-    Render()
-    {
-        super.Render();
-        this.sprite.transform = this.transform;
-        this.sprite.Render();
     }
 
 }
@@ -985,24 +1039,51 @@ class CannonTurret extends Turret
     }
 
 }
+class Shotgun extends CannonTurret
+{
+    constructor(transform = new Transform())
+    {
+        super(sprites.rocket_launcher, 4, 200, transform);
+        this.fov = 1.3;
+        this.upgrades.Alcance.max_level = 1;
+        this.upgrades.Dano = new Upgrade(120, 4);
+        this.upgrades.N = new Upgrade(4, 4, .5, 1);
+        this.name = "Shotgun";
+        this.cost = 100;
+        this.transform.scale = .5;
+    }
+    get copy() { return new Shotgun(this.transform); }
+    get damage() { return this.upgrades.Dano.value; }
+    get N() { return this.upgrades.N.value; }
+    get info() { return super.info.concat("Alvos: Terrestres", "Dano: " + this.damage, "N° de Balas: " + this.N); }
+    UpdateTargetsInRange()
+    {
+        super.UpdateTargetsInRange();
+        this.targets_in_range = this.targets_in_range.filter(t => { return t.type == "Terrestre"; });
+    }
+    Shoot()
+    {
+        let t = this.transform.copy;
+        t.scale = 2;
+        for (let i = 0; i < this.upgrades.N.value; i++)
+            this.manager.AddEntity(new Bullet(sprites.bullet, this.damage, 0, 0, 800, this.targets[Math.round(Math.random() * (this.targets.length - 1))], t));
+    }
+}
 class RocketLauncher extends CannonTurret
 {
     constructor(transform = new Transform())
     {
-        super(sprites.rocket_launcher, 2.5, 120, transform);
-        this.upgrades.damage = new Upgrade(40, 4);
-        this.upgrades.aoe = new Upgrade(60, 4);
+        super(sprites.rocket_launcher, 2.5, 200, transform);
+        this.upgrades.Dano = new Upgrade(40, 4);
         this.name = "Lança Missel";
         this.cost = 100;
         this.transform.scale = .5;
+        this.evolutions = [new Shotgun()];
+        this.aoe = 70;
     }
     get copy() { return new RocketLauncher(this.transform); }
-    get damage() { return this.upgrades.damage.value; }
-    get aoe() { return this.upgrades.aoe.value; }
-    get info()
-    {
-        return super.info.concat("Alvos: Terrestres", "Dano: " + this.damage, "Area de Efeito: " + this.aoe);
-    }
+    get damage() { return this.upgrades.Dano.value; }
+    get info() { return super.info.concat("Alvos: Terrestres", "Dano: " + this.damage, "Area de Efeito: " + this.aoe); }
     UpdateTargetsInRange()
     {
         super.UpdateTargetsInRange();
@@ -1027,10 +1108,7 @@ class AntiAir extends CannonTurret
     get copy() { return new AntiAir(this.transform); }
     get damage() { return this.upgrades.damage.value; }
     get aoe() { return this.upgrades.aoe.value; }
-    get info()
-    {
-        return super.info.concat("Alvos: Aéreos", "Dano: " + this.damage, "Area de Efeito: " + this.aoe);
-    }
+    get info() { return super.info.concat("Alvos: Aéreos", "Dano: " + this.damage, "Area de Efeito: " + this.aoe); }
     UpdateTargetsInRange()
     {
         super.UpdateTargetsInRange();
@@ -1092,8 +1170,10 @@ class GameMap extends Entity
     }
     Reset()
     {
+        this.timer.elapsed = 0;
         this.wave_index = 0;
         this.enemy_index = 0;
+        this.timer.delay = this.current_wave.delay;
         this.core._life = this.core.max_life;
     }
 }
@@ -1121,33 +1201,29 @@ class GameManager extends EntityManager
     {
         this.map = this._map;
     }
-    AddEntity(entity)
-    {
-        if (entity instanceof MachineGun && !(entity instanceof LaserGun))
-            entity.evolutions.push(new LaserGun());
-        super.AddEntity(entity);
-    }
 }
 
 let paths =
 [
-    new Path(sprites.paths[0], new KillableEntity(5000, trans(vec(375, 535))), vec(0, 105), vec(332, 105), vec(332, 235), vec(730, 235), vec(730, 445), vec(375, 445)),
+    new Path(sprites.paths[0], new KillableEntity(5000, trans(vec(375, 580))), vec(0, 105), vec(332, 105), vec(332, 235), vec(730, 235), vec(730, 445), vec(375, 445)),
     new Path(sprites.paths[1], new KillableEntity(5000, trans(vec(625, 540))), vec(0, 100), vec(650, 100), vec(650, 290), vec(155, 290), vec(155, 450), vec(625, 450)),
-    new Path(sprites.paths[2], new KillableEntity(5000, trans(vec(580, 542))), vec(0, 65), vec(240, 65), vec(240, 175), vec(435, 175), vec(435, 65), vec(725, 65), vec(725, 328), vec(295, 328), vec(295, 478), vec(580, 478)),
+    new Path(sprites.paths[2], new KillableEntity(5000, trans(vec(580, 588))), vec(0, 65), vec(240, 65), vec(240, 175), vec(435, 175), vec(435, 65), vec(725, 65), vec(725, 328), vec(295, 328), vec(295, 478), vec(580, 478)),
+    new Path(sprites.paths[3], new KillableEntity(5000, trans(vec(270, 592))), vec(0, 358), vec(136, 358), vec(136, 43), vec(360, 43), vec(360, 145), vec(542, 145), vec(542, 50), vec(720, 50), vec(720, 255), vec(318, 255), vec(318, 393), vec(583, 393), vec(583, 505), vec(270, 505)),
 ];
 
 let waves =
 [
-    [wave(10), wave(.5, spider_factory.Create[0], 20), wave(10), wave(.5, beetle_factory.Create[0], 20), wave(10), wave(.5, wasp_factory.Create[0], 20)],
-    [wave(10), wave(.5, spider_factory.Create[3], 20), wave(10), wave(.5, beetle_factory.Create[3], 20), wave(10), wave(.5, wasp_factory.Create[3], 20)],
-    [wave(10), wave(.5, spider_factory.Create[3], 20), wave(10), wave(.5, beetle_factory.Create[3], 20), wave(10), wave(.5, wasp_factory.Create[3], 20)],
+    [wave(20), wave(.5, spider_factory.Create[0], 20), wave(10), wave(.5, beetle_factory.Create[0], 20), wave(10), wave(.5, wasp_factory.Create[0], 20)],
+    [wave(20), wave(.5, spider_factory.Create[3], 20), wave(10), wave(.5, beetle_factory.Create[3], 20), wave(10), wave(.5, wasp_factory.Create[3], 20)],
+    [wave(20), wave(.5, spider_factory.Create[3], 20), wave(10), wave(.5, beetle_factory.Create[3], 20), wave(10), wave(.5, wasp_factory.Create[3], 20)],
 ];
 
 let maps =
 [
-    new GameMap(sprites.paths[0], paths[0], waves[0]),
     new GameMap(sprites.paths[1], paths[1], waves[1]),
+    new GameMap(sprites.paths[0], paths[0], waves[0]),
     new GameMap(sprites.paths[2], paths[2], waves[2]),
+    new GameMap(sprites.paths[3], paths[3], waves[0]),
 ];
 
 let manager = new GameManager();
@@ -1197,7 +1273,7 @@ let gui =
             if (Button(pos, size, e.name + " " + e.cost + "g") && Player.gold >= e.cost)
             {
                 let t = e.copy;
-                t.transform = turret.transform;
+                t.transform.position = turret.transform.position;
                 manager.AddEntity(this.selected_entity = t);
                 turret.Release();
                 Player.gold -= e.cost;
