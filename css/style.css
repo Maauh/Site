@@ -1,38 +1,45 @@
+.scrollspySite {
+    position: relative;
+    overflow: auto;
+    height: 280px;   
+}
 .background {
-    background: black url("..//imagem/background1.jpg") repeat right top;
- }
- .container-fluid {
-    display: flex;
-    justify-content: center;
- }
-.container {
+    background: black url("../imagem/background1.jpg") repeat right top;
+    padding: 0;
+    margin: 0;
+}
+.container1 {
     padding: 30px;
     margin: 0 auto;
-    margin-bottom: 1%;
     padding: 25px;
     background: whitesmoke;
     text-align: center;
-    max-width: 800px;
+    max-width: 1100px;
     color: black;
     border: solid 1px black;
     box-shadow: 0px 0px 40px 10px white;
 }
-.navbar{
+.img-grupo{
+    box-shadow: 0 0 2px 1px black;
+    width: 200px;
+    height: 150px;
+}
+.container footer{
+    padding-top: 50px;
     margin: 0 auto;
-    border: solid 1px black;
-    text-align: center;
-    /* margin-bottom: -1px; */
+    clear: both;
 }
-h1, h2, h3, h4, h5, h6, p, a{
-    font-style: italic;
-    font-family: arial, sans-serif;
+.frase{
+    padding-top: 50px;
+    margin: 0 auto;
 }
-h3{  
-    font-size: 20px;
-} 
-h1{  
-    font-style: italic;
-    font-weight: bold;
+.carousel{
+    box-shadow: 0 0 2px 1px black;
+    max-width: 500px;
+    margin: 0 auto;
+}
+.carousel-inner img{
+    margin: auto;
 }
 .container_diversao {
     padding: 30px;
@@ -48,79 +55,31 @@ h1{
     width: 100%;
     height: 100%;
 }
-.container img{
-    padding-top: 50px;
+.img-fluid{
+    box-shadow: 0 0 2px 1px black;
+    
+}
+.rob{
+    box-shadow: 0 0 2px 1px black;
+    width: 622px;
+    height: 400px;
     margin: 0 auto;
 }
-.container footer{
-    padding-top: 50px;
-    margin: 0 auto;
-    clear: both;
-}
-.video{
-    margin: 0 auto;
-    width: 200px;
-    height: 200px;
-}
-.img1{
-    float: left;
-}
-.img2{
-    float: right;
-}
-.video{
-    width: 200px;
-    height: 200px;
-}
-.perfil-sobre-nos{
-    max-width: 400px;
-    padding: 0;
-    margin: 0 auto;
-}
-.perfil-sobre-nos div{
-    margin: 0 auto;
-    padding: 4px;
-    text-align: center;
-}
-.perfil-sobre-nos div img{
-    margin: 0 auto;
-    padding: 0;
-    border: solid 1px black;
-    border-radius: 8%;
-    /* box-shadow: 0px 0px 250px 1px #000; */
-    width: 100%;
-    height: auto;
-    max-width: 150px;
-    max-height: 150px;
-}
-.perfil-sobre-nos div img:hover {
+.embed-responsive {
     box-shadow: 0 0 2px 1px black;
 }
-.perfil-sobre-nos div h1{
-    margin: 0 auto;
-    text-align: center;
-    margin-top: 10px;
+.texto1{
+    float: right;
 }
-.perfil-sobre-nos div p{
-    margin: 0 auto;
-    text-align: center;
-    margin-bottom: 10px;
-}
-.product .img-responsive {
-    margin: 0 auto;
-}
-.navbar{
-    text-align: center;
-}
-.img-overlay {
-    position: relative;
-    max-width: 500px;
-}
-.row{
-    margin: 0;
+.video1{
+    float: left;
 }
 .game-canvas{
     margin: 0 auto;
     border: #000000 solid 1px;
     border-radius: 10px;
+}
+.navbar{
+    background-color: black;
+    /* background-image: linear-gradient(black, black, gray); */
 }
