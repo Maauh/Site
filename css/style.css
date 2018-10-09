@@ -68,9 +68,6 @@
 .embed-responsive {
     box-shadow: 0 0 2px 1px black;
 }
-.texto1{
-    float: right;
-}
 .video1{
     float: left;
 }
@@ -81,5 +78,17 @@
 }
 .navbar{
     background-color: black;
-    /* background-image: linear-gradient(black, black, gray); */
+}
+.perfil-moldura{
+    margin: 15px;
+    text-align: center;
+}
+.foto-perfil{
+    margin: 0;
+    padding: 0;
+    border: solid 1px black;
+    border-radius: 8%;
+}
+.foto-perfil:hover{
+    box-shadow: 0 0 2px 1px black;
 }
