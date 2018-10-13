@@ -350,8 +350,10 @@ let sprites =
     rocket_launcher: Sprite.CreateArray("imagem/turrets/rocket_launcher.png", "imagem/turrets/rocket_launcher_enabled.png", "imagem/turrets/rocket_launcher_disabled.png"),
     mini_gun: Sprite.CreateSheet("imagem/turrets/mini_gun_", 2, ".png"),
     shotgun: new Sprite("imagem/turrets/shotgun.png"),
+    toxic_launcher: new Sprite("imagem/turrets/toxic_launcher.png"),
     base: Sprite.CreateArray("imagem/turrets/base.png", "imagem/turrets/base_enabled.png", "imagem/turrets/base_disabled.png"),
     rocket: new Sprite("imagem/projectiles/rocket.png"),
+    toxic_rocket: new Sprite("imagem/projectiles/toxic_rocket.png"),
     bullet: new Sprite("imagem/projectiles/bullet.png"),
     laser_beam: new Sprite("imagem/Projectiles/laser.png"),
     explosion: Sprite.CreateArray("imagem/effects/tile000.png", "imagem/effects/tile001.png", "imagem/effects/tile002.png", "imagem/effects/tile003.png","imagem/effects/tile004.png"),
@@ -359,7 +361,7 @@ let sprites =
     grass: new Sprite("imagem/background/grass.jpg"),
     paths: Sprite.CreateSheet("imagem/background/Track", 4,".png"),
     menu_background: new Sprite("imagem/background/menu.png"),
-    tutorial: Sprite.CreateSheet("imagem/tutorial/tut", 2, ".jpg"),
+    tutorial: Sprite.CreateSheet("imagem/tutorial/tut", 3, ".png"),
 }
 class Entity extends Transformable
 {
@@ -440,7 +442,7 @@ class Animation extends Entity
         this.times_to_play = times_to_play;
         this.opacity = opacity;
         this.timer = new Timer(1 / frame_rate, this.OnTimerTick.bind(this));
-        this.render_layer = 1;
+        this.render_layer = 2;
     }
     get copy() { return new Animation(this.frame_rate, this.sprites, this.transform); }
     get frame_rate() { return this.timer.frequency; }
@@ -790,6 +792,61 @@ class Rocket extends Projectile
         this.Release();
     }
 }
+class ToxicCloud extends Entity
+{
+    constructor(radius, damage, duration, transform = new Transform())
+    {
+        super(transform);
+        this.render_layer = 3;
+        this.radius = radius;
+        this.damage = damage;
+        this.duration = duration;
+        this.elapsed = 0;
+        this.circles = [];
+        for (let i = 0; i < 30; i++)
+        {
+            let radius = (Math.random() * .6 + .4) * this.radius * .7;
+            let offset = this.radius - radius;
+            this.circles.push({
+                radius: radius,
+                offset: offset,
+                angle: Math.random() * 2 * Math.PI,
+                vel: Math.random() - .5,
+                alpha_vel: Math.random() * .2 + .05,
+                alpha: Math.random() * .4 + .2,
+            });
+        }
+        this.remove_filter = null;
+    }
+    get percent() { return (this.duration - this.elapsed) / this.duration; }
+    Update()
+    {
+        this.circles.forEach(c => {
+            c.angle += c.vel * Time.deltaTime;
+            c.alpha += c.alpha_vel * Time.deltaTime;
+            if (c.alpha < .2 || c.alpha > .6) c.alpha_vel = -c.alpha_vel;
+        });
+        let enemies = this.manager.OverlapCircle(this.transform.position, this.radius, e => { return e instanceof Enemy; });
+        if (this.remove_filter) enemies.remove_if(e => { return this.remove_filter(e); });
+        enemies.forEach(e => { e.life -= this.damage * this.percent * Time.deltaTime; });
+        this.elapsed += Time.deltaTime;
+        if (this.elapsed > this.duration)
+            this.Release();
+    }
+    Render()
+    {
+        this.circles.forEach(c => {
+            let pos = this.transform.position.add(Vector2.angleVector(c.angle).mult(c.offset));
+            context.globalAlpha = c.alpha * this.percent;
+            let grd = context.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, c.radius);
+            grd.addColorStop(0,"#7df442");
+            grd.addColorStop(1,"transparent");
+            let style = grd;
+            RenderCircleFilled(pos, c.radius, style);
+        });
+        context.globalAlpha = 1;
+    }
+}
 class Upgrade
 {
     constructor(base_value, max_level, scale = .25, level = 1)
@@ -921,7 +978,9 @@ class LaserGun extends Turret
     Shoot()
     {
         this.left = !this.left;
-        this.manager.AddEntity(new Bullet(this.bullet_sprite, this.damage, this.chains, this.bullet_aoe, this.bullet_speed, this.target, trans(this.bullet_position, this.transform.rotation, this.transform.scale)));
+        let bullet = new Bullet(this.bullet_sprite, this.damage, this.chains, this.bullet_aoe, this.bullet_speed, this.target, trans(this.bullet_position, this.transform.rotation, this.transform.scale));
+        bullet.remove_filter = this.remove_filter;
+        this.manager.AddEntity(bullet);
     }
     Render()
     {
@@ -1014,12 +1073,14 @@ class CannonTurret extends Turret
     {
         super(fire_rate, base_range, transform);
         this.cannon_sprites = cannon_sprites;
+        this.cannon_scale = 1;
     }
     Render()
     {
         super.Render();
         let sprite = this.cannon_sprites[0];
         sprite.transform = this.transform;
+        sprite.transform.scale *= this.cannon_scale;
         if (this.targets.length > 0)
             sprite.transform.position = this.transform.position.add(Vector2.angleVector(this.transform.rotation).mult(((this.timer.delay - this.timer.to_tick) / this.timer.delay) * 10 * this.transform.scale));
         sprite.Render();
@@ -1038,12 +1099,12 @@ class Shotgun extends CannonTurret
     constructor(transform = new Transform())
     {
         super([sprites.shotgun], 4, 200, transform);
-        this.fov = 1.3;
+        this.fov = 1.1;
         this.upgrades.Alcance.max_level = 1;
-        this.upgrades.Dano = new Upgrade(120, 4);
-        this.upgrades.N = new Upgrade(4, 4, .5, 1);
+        this.upgrades.Dano = new Upgrade(90, 4);
+        this.upgrades.N = new Upgrade(4, 3, .5, 1);
         this.name = "Shotgun";
-        this.cost = 100;
+        this.cost = 120;
         this.transform.scale = .5;
         this.remove_filter = e => { return e.type == "Aéreo"; };
     }
@@ -1055,8 +1116,42 @@ class Shotgun extends CannonTurret
     {
         let t = this.transform.copy;
         t.scale = 2;
-        for (let i = 0; i < this.upgrades.N.value; i++)
-            this.manager.AddEntity(new Bullet(sprites.bullet, this.damage, 0, 0, 800, this.targets[Math.round(Math.random() * (this.targets.length - 1))], t));
+        
+        for (let i = 0; i < this.targets.length && i < this.N; i++)
+            this.manager.AddEntity(new Bullet(sprites.bullet, this.damage, 0, 0, 800, this.targets[i], t));
+    }
+}
+class ToxicLauncher extends CannonTurret
+{
+    constructor(transform = new Transform())
+    {
+        super([sprites.toxic_launcher], 1.5, 200, transform);
+        this.upgrades.Dano = new Upgrade(120, 5);
+        this.upgrades.Duração = new Upgrade(2, 3, .5);
+        this.name = "Lança Tóxicos";
+        this.cost = 120;
+        this.transform.scale = .5;
+        this.aoe = 50;
+        this.remove_filter = e => { return e.type == "Aéreo"; };
+    }
+    get copy() { return new ToxicLauncher(this.transform); }
+    get damage() { return this.upgrades.Dano.value; }
+    get duration() { return this.upgrades.Duração.value; }
+    get info() { return super.info.concat("Alvos: Terrestres", "Dano Inicial: " + this.damage, "Duração: " + this.duration + " Segundos", "Area de Efeito: " + this.aoe); }
+    Shoot()
+    {
+        let rocket = new Rocket(sprites.toxic_rocket, null, this.damage, this.aoe, 500, this.target, this.transform);
+        rocket.duration = this.duration;
+        let d = this;
+        rocket.OnHit = function()
+        {
+            let cloud = new ToxicCloud(this.aoe, this.damage, this.duration, this.transform);
+            cloud.remove_filter = d.remove_filter;
+            this.manager.AddEntity(cloud);
+            this.Release();
+        }
+        rocket.transform.scale = 1;
+        this.manager.AddEntity(rocket);
     }
 }
 class RocketLauncher extends CannonTurret
@@ -1065,10 +1160,10 @@ class RocketLauncher extends CannonTurret
     {
         super(sprites.rocket_launcher, 2.5, 200, transform);
         this.upgrades.Dano = new Upgrade(40, 4);
-        this.name = "Lança Missel";
+        this.name = "Lança Mísseis";
         this.cost = 100;
         this.transform.scale = .5;
-        this.evolutions = [new Shotgun()];
+        this.evolutions = [new Shotgun(), new ToxicLauncher()];
         this.aoe = 70;
         this.remove_filter = e => { return e.type == "Aéreo"; };
     }
@@ -1085,20 +1180,19 @@ class AntiAir extends CannonTurret
     constructor(transform = new Transform())
     {
         super(sprites.anti_air, 3.5, 200, transform);
-        this.upgrades.damage = new Upgrade(40, 4);
-        this.upgrades.aoe = new Upgrade(70, 4);
+        this.upgrades.Dano = new Upgrade(40, 4);
         this.name = "Anti-Aéreo";
         this.cost = 120;
         this.transform.scale = .5;
+        this.aoe = 70;
         this.remove_filter = e => { return e.type == "Terrestre"; };
     }
     get copy() { return new AntiAir(this.transform); }
-    get damage() { return this.upgrades.damage.value; }
-    get aoe() { return this.upgrades.aoe.value; }
+    get damage() { return this.upgrades.Dano.value; }
     get info() { return super.info.concat("Alvos: Aéreos", "Dano: " + this.damage, "Area de Efeito: " + this.aoe); }
     Shoot()
     {
-        this.manager.AddEntity(new Rocket(sprites.rocket, animations.explosion_realistic, this.upgrades.damage.value, this.upgrades.aoe.value, 350, this.target, this.transform));
+        this.manager.AddEntity(new Rocket(sprites.rocket, animations.explosion_realistic, this.damage, this.aoe, 350, this.target, this.transform));
     }
 }
 let turrets =
@@ -1373,14 +1467,14 @@ let tut_index = 0;
 function RenderStartMenu()
 {
     sprites.menu_background.Render();
-    let size = vec(100, 50);
-    let pos = vec(canvas.clientWidth * .5, canvas.clientHeight * .5).sub(size.div(2));
+    let size = vec(canvas.width * .1, canvas.height * .08);
+    let pos = vec(canvas.width * .5, canvas.height * .5).sub(size.div(2));
     if (Button(pos, size, "Jogar"))
     {
         manager.map = maps[0];
         game_state = 2;
     }
-    pos = vec(canvas.clientWidth * .5, canvas.clientHeight * .6).sub(size.div(2));
+    pos = vec(canvas.width * .5, canvas.height * .6).sub(size.div(2));
     if (Button(pos, size, "Instruções"))
     {
         game_state = 5;
@@ -1390,8 +1484,8 @@ function RenderStartMenu()
 
 function RenderGameOver()
 {
-    let size = vec(150, 50);
-    let pos = vec(canvas.clientWidth / 2, canvas.clientHeight / 2).sub(size.div(2));
+    let size = vec(canvas.width * .15, canvas.height * .08);
+    let pos = vec(canvas.width / 2, canvas.height / 2).sub(size.div(2));
     if (Button(pos, size, "Tentar Novamente"))
     {
         manager.Reset();
@@ -1403,8 +1497,8 @@ function RenderGameOver()
 
 function RenderScore()
 {
-    let size = vec(100, 50);
-    let pos = vec(canvas.clientWidth / 2, canvas.clientHeight / 2).sub(size.div(2));
+    let size = vec(canvas.width * .1, canvas.height * .08);
+    let pos = vec(canvas.width / 2, canvas.height / 2).sub(size.div(2));
     if (Button(pos, size, "Continuar"))
     {
         if (++map_index == maps.length)
@@ -1428,21 +1522,21 @@ function RenderCredits()
 
 function RenderTutorial()
 {
-    let size = vec(100, 50);
+    let size = vec(canvas.width * .1, canvas.height * .08);
     sprites.tutorial[tut_index].Render();
     if (tut_index < sprites.tutorial.length - 1)
     {
-        let pos = vec(canvas.clientWidth * .65, canvas.clientHeight * .9).sub(size.div(2));
+        let pos = vec(canvas.width * .65, canvas.height * .9).sub(size.div(2));
         if (Button(pos, size, "Próximo"))
             tut_index++;
     }
     if (tut_index > 0)
     {
-        let pos = vec(canvas.clientWidth * .35, canvas.clientHeight * .9).sub(size.div(2));
+        let pos = vec(canvas.width * .35, canvas.height * .9).sub(size.div(2));
         if (Button(pos, size, "Anterior"))
             tut_index--;
     }
-    let pos = vec(canvas.clientWidth * .5, canvas.clientHeight * .9).sub(size.div(2));
+    let pos = vec(canvas.width * .5, canvas.height * .9).sub(size.div(2));
     if (Button(pos, size, "Menu"))
         game_state = 0;
 }
@@ -1454,6 +1548,8 @@ function Start()
     sprites.tutorial.forEach(b => { b.top_position = vec(0, 0); });
     sprites.menu_background.top_position = vec(0, 0);
     manager.map = maps[0];
+
+    manager.AddEntity(new ToxicCloud(10, trans(vec(50, 50))));
 }
 
 function Update()
@@ -1496,6 +1592,7 @@ function Render()
         RenderTutorial();
         break;
     }
+    // RenderCircle(Input.mousePos, 5, "#F00", "#000", 1);
 }
 
 let lastRender = 0;
@@ -1511,19 +1608,37 @@ function loop(elapsed)
     window.requestAnimationFrame(loop);
 }
 
-canvas.addEventListener("click", e => { Input.mouseClick = true; });
+function handleClick(e)
+{
+    e.preventDefault();
+    Input.mouseClick = true;
+}
+canvas.addEventListener("click", handleClick);
+canvas.addEventListener("touchend", handleClick);
 canvas.addEventListener("mousemove", e =>
 {
+    e.preventDefault();
+    Input.mouseClick = false;
+    let mouseX = e.offsetX * canvas.width / canvas.clientWidth | 0;
+    let mouseY = e.offsetY * canvas.height / canvas.clientHeight | 0;
+    Input.mousePos = vec(mouseX, mouseY);
+});
+function handleTouchMove(e)
+{
+    e.preventDefault();
+    let touches = e.changedTouches;
+    if (touches.length > 1)
+        return;
+    const touch = touches[0];
     let rect = canvas.getBoundingClientRect();
-    Input.mousePos = vec(e.clientX - rect.left, e.clientY - rect.top);
-});
-
-document.addEventListener("keydown", e => {
-    Input.keyDown[e.which] = true;
-});
-document.addEventListener("keyup", e => {
-    Input.keyDown[e.which] = false;
-});
+    let mouseX = (touch.clientX - rect.left) * canvas.width / canvas.clientWidth | 0;
+    let mouseY = (touch.clientY - rect.top) * canvas.height / canvas.clientHeight | 0;
+    Input.mousePos = vec(mouseX, mouseY);
+}
+canvas.addEventListener("touchstart", handleTouchMove);
+canvas.addEventListener("touchmove", handleTouchMove);
+document.addEventListener("keydown", e => { Input.keyDown[e.which] = true; });
+document.addEventListener("keyup", e => { Input.keyDown[e.which] = false; });
 
 window.onload = function()
 {
