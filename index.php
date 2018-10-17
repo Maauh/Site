@@ -33,14 +33,47 @@
   </nav>
   <div class="container1">
     <div>
-      <h1 class="display-3 ">Todo Mundo Junto</h1>
+      <h1 class="display-3 ">POTATOES PARTY</h1>
     </div>
-    <footer class="page-footer font-small cyan darken-3">
-      <div class="footer-copyright text-center py-3">
-        &copy; 2018 Copyright, Todos os Direitos Reservados. Criação e implementação Grupo Potatoes Party.
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-6 img-container">
+        <img alt="#" src="imagem/nos.jpg" class="img-thumbnail" />
       </div>
-    </footer>
-  </div>
+      <div class="col-12 col-sm-12 col-md-6">
+        <?php
+          if (isset($_SESSION))
+            echo MEME
+
+        ?>
+        <form class="form-signin" method="POST" action="valida.php">
+          <h2 class="form-signin-heading">Login</h2>
+          <label for="inputEmail" class="sr-only">Email</label>
+          <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus><br>
+          <label for="inputPassword" class="sr-only">Senha</label>
+          <input type="password" name="senha" id="inputPassword" class="form-control" placeholder="Senha" required><br>
+          <button class="btn btn-lg btn-danger btn-block" type="submit">Acessar</button>
+        </form>
+      <p class="text-center text-danger">
+        <?php if(isset($_SESSION['loginErro'])){
+          echo $_SESSION['loginErro'];
+          unset($_SESSION['loginErro']);
+        }?>
+      </p>
+      <p class="text-center text-success">
+        <?php 
+        if(isset($_SESSION['logindeslogado'])){
+          echo $_SESSION['logindeslogado'];
+          unset($_SESSION['logindeslogado']);
+        }
+        ?>
+        <br>
+      </div>
+      <footer class="page-footer font-small cyan darken-3">
+        <div class="footer-copyright text-center py-3">
+          &copy; 2018 Copyright, Todos os Direitos Reservados. Criação e implementação Grupo Potatoes Party.
+        </div>
+      </footer>
+    </div>
 </body>
 
 </html>
