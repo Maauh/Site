@@ -89,3 +89,15 @@
 .foto-perfil:hover{
     box-shadow: 0 0 2px 1px black;
 }
+.robocup-card{
+    text-align: center;
+    border-radius: 1%;
+    border: solid 1px black;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+.robocup-card div{
+    padding: 25px 15px;
+}
+.robocup-card div img{
+    padding: 25px 15px;
+}
