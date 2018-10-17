@@ -36,7 +36,8 @@
         <div class="container">
             <div class="row">
                 <?php
-                    $conexao = mysqli_connect('localhost','id7472579_admin', 'password', 'id7472579_dados') or die ("A conexão não foi executada com sucesso");
+                    // $conexao = mysqli_connect('localhost','id7472579_admin', 'password', 'id7472579_dados') or die ("A conexão não foi executada com sucesso");
+                    $conexao = mysqli_connect('localhost','root', '', 'dados') or die ("A conexão não foi executada com sucesso");
                     $conexao->set_charset("utf-8");
                     $consulta = "SELECT NOME, ID, DESCR, FUNC FROM integrantes";
                     $resultado = mysqli_query($conexao,$consulta);
