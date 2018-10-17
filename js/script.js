@@ -99,6 +99,10 @@ function MinDistanceFromPointToLine(v1, v2, point)
     let AC = Vector2.sub(point, v1);
     return Math.abs(Vector2.cross(AC, AB) / AB.magnitude);
 }
+function IsInsideLine(point, a, b, aprox = .1)
+{
+    return Math.abs(point.distance(a) + point.distance(b) - Vector2.distance(a, b)) <= aprox;
+}
 function IntersectLines(a, b, c, d)
 {
     const r = Vector2.sub(b, a);
@@ -179,6 +183,16 @@ function AddProperty(o, name, get, set = undefined)
         set: set,
         enumerable: true,
     });
+}
+function RenderTrail(style, radius, lines_number, alpha, ...positions)
+{
+    let r = radius / lines_number;
+    for (let i = 0; i < lines_number; i++)
+    {
+        context.globalAlpha = (1 / (lines_number - i)) * alpha;
+        RenderLines(style, radius - i * r, ...positions);
+    }
+    context.globalAlpha = 1;
 }
 let Input =
 {
@@ -351,12 +365,13 @@ let sprites =
     mini_gun: Sprite.CreateSheet("imagem/turrets/mini_gun_", 2, ".png"),
     shotgun: new Sprite("imagem/turrets/shotgun.png"),
     toxic_launcher: new Sprite("imagem/turrets/toxic_launcher.png"),
+    sniper: new Sprite("imagem/turrets/sniper.png"),
     base: Sprite.CreateArray("imagem/turrets/base.png", "imagem/turrets/base_enabled.png", "imagem/turrets/base_disabled.png"),
     rocket: new Sprite("imagem/projectiles/rocket.png"),
     toxic_rocket: new Sprite("imagem/projectiles/toxic_rocket.png"),
     bullet: new Sprite("imagem/projectiles/bullet.png"),
-    laser_beam: new Sprite("imagem/Projectiles/laser.png"),
-    explosion: Sprite.CreateArray("imagem/effects/tile000.png", "imagem/effects/tile001.png", "imagem/effects/tile002.png", "imagem/effects/tile003.png","imagem/effects/tile004.png"),
+    laser_beam: new Sprite("imagem/projectiles/laser.png"),
+    explosion: Sprite.CreateSheet("imagem/effects/tile00", 5, ".png"),
     explosion_realistic: Sprite.CreateSheet("imagem/effects/realexplosion/", 27, ".png"),
     grass: new Sprite("imagem/background/grass.jpg"),
     paths: Sprite.CreateSheet("imagem/background/Track", 4,".png"),
@@ -800,8 +815,7 @@ class ToxicCloud extends Entity
         this.render_layer = 3;
         this.radius = radius;
         this.damage = damage;
-        this.duration = duration;
-        this.elapsed = 0;
+        this.timer = new Timer(duration, () => { this.Release(); });
         this.circles = [];
         for (let i = 0; i < 30; i++)
         {
@@ -818,9 +832,10 @@ class ToxicCloud extends Entity
         }
         this.remove_filter = null;
     }
-    get percent() { return (this.duration - this.elapsed) / this.duration; }
+    get percent() { return this.timer.to_tick / this.timer.delay; }
     Update()
     {
+        this.timer.Update();
         this.circles.forEach(c => {
             c.angle += c.vel * Time.deltaTime;
             c.alpha += c.alpha_vel * Time.deltaTime;
@@ -829,9 +844,6 @@ class ToxicCloud extends Entity
         let enemies = this.manager.OverlapCircle(this.transform.position, this.radius, e => { return e instanceof Enemy; });
         if (this.remove_filter) enemies.remove_if(e => { return this.remove_filter(e); });
         enemies.forEach(e => { e.life -= this.damage * this.percent * Time.deltaTime; });
-        this.elapsed += Time.deltaTime;
-        if (this.elapsed > this.duration)
-            this.Release();
     }
     Render()
     {
@@ -845,6 +857,28 @@ class ToxicCloud extends Entity
             RenderCircleFilled(pos, c.radius, style);
         });
         context.globalAlpha = 1;
+    }
+}
+class BulletTrail extends Entity
+{
+    constructor(radius, duration, start, end)
+    {
+        super(new Transform);
+        this.start = start;
+        this.end = end;
+        this.radius = radius;
+        this.render_layer = 6;
+        this.lines_number = 10;
+        this.timer = new Timer(duration, () => { this.Release(); });
+    }
+    get percent() { return this.timer.to_tick / this.timer.delay; }
+    Update()
+    {
+        this.timer.Update();
+    }
+    Render()
+    {
+        RenderTrail("white", this.radius, this.lines_number, this.percent, this.start, this.end);
     }
 }
 class Upgrade
@@ -881,6 +915,7 @@ class Turret extends Entity
         this.cost = 0;
         this.evolutions = [];
         this.remove_filter = null;
+        this.turn_speed = 10;
     }
     get copy() { return new Turret(this.fire_rate, this.range, this.transform); }
     get range() { return this.upgrades.Alcance.value; }
@@ -904,7 +939,7 @@ class Turret extends Entity
     }
     UpdateRotation()
     {
-        this.transform.FaceTo(this.targets_in_range[0].transform.position, 10 * Time.deltaTime);
+        this.transform.FaceTo(this.targets_in_range[0].transform.position, this.turn_speed * Time.deltaTime);
     }
     Update()
     {
@@ -1074,7 +1109,9 @@ class CannonTurret extends Turret
         super(fire_rate, base_range, transform);
         this.cannon_sprites = cannon_sprites;
         this.cannon_scale = 1;
+        this.cannon_size = 0;
     }
+    get bullet_origin() { return this.transform.position.add(Vector2.angleVector(this.transform.rotation).mult(this.cannon_size)); }
     Render()
     {
         super.Render();
@@ -1175,6 +1212,43 @@ class RocketLauncher extends CannonTurret
         this.manager.AddEntity(new Rocket(sprites.rocket, animations.explosion_realistic, this.damage, this.aoe, 500, this.target, this.transform));
     }
 }
+class Sniper extends CannonTurret
+{
+    constructor(transform = new Transform())
+    {
+        super([sprites.sniper], 2, 200, transform);
+        this.upgrades.Alcance = new Upgrade(9000, 1);
+        this.upgrades.Dano = new Upgrade(150, 5);
+        this.name = "Sniper";
+        this.cost = 120;
+        this.transform.scale = .5;
+        this.remove_filter = e => { return e.type == "Terrestre"; };
+        this.fov = .1;
+        this.turn_speed = 30;
+        this.cannon_size = 54;
+    }
+    get copy() { return new Sniper(this.transform); }
+    get damage() { return this.upgrades.Dano.value; }
+    get aoe() { return 10; }
+    get info() { return super.info.concat("Alvos: Aéreos", "Dano: " + this.damage); }
+
+    UpdateTargetsInRange()
+    {
+        super.UpdateTargetsInRange();
+        this.targets_in_range = this.targets_in_range.sort((a, b) => { 
+            return b.transform.position.distance(this.transform.position) - a.transform.position.distance(this.transform.position);
+         });
+    }
+    Shoot()
+    {
+        let end = Vector2.angleVector(this.transform.rotation).mult(this.range).add(this.transform.position);
+        this.targets.forEach(e => {
+            if (IsInsideLine(e.transform.position, this.transform.position, end, this.aoe))
+                e.life -= this.damage;
+        });
+        this.manager.AddEntity(new BulletTrail(this.aoe, .8, this.bullet_origin, end));
+    }
+}
 class AntiAir extends CannonTurret
 {
     constructor(transform = new Transform())
@@ -1186,6 +1260,7 @@ class AntiAir extends CannonTurret
         this.transform.scale = .5;
         this.aoe = 70;
         this.remove_filter = e => { return e.type == "Terrestre"; };
+        this.evolutions = [new Sniper]
     }
     get copy() { return new AntiAir(this.transform); }
     get damage() { return this.upgrades.Dano.value; }
@@ -1262,6 +1337,8 @@ class GameManager extends EntityManager
         super();
         this._map = null;
     }
+    get level_completed() { return this.map.finished && !this.entities.filter(e => { return e instanceof Enemy; }).length; }
+    get game_over() { return this.map.core.life == 0; }
     get map() { return this._map; }
     set map(value)
     {
@@ -1323,7 +1400,7 @@ let gui =
     },
     RenderTowerUpgrades(top_position, turret)
     {
-        let size = vec(200, 25);
+        let size = vec(200, 40);
         let pos = top_position.add(vec(0, 5));
         let evolution_ready = true;
         for (let p in turret.upgrades)
@@ -1492,13 +1569,15 @@ function RenderGameOver()
         gui.Reset();
         game_state = 2;
     }
-    
 }
 
 function RenderScore()
 {
-    let size = vec(canvas.width * .1, canvas.height * .08);
-    let pos = vec(canvas.width / 2, canvas.height / 2).sub(size.div(2));
+    let size = vec(canvas.width * .2, canvas.height * .08);
+    let pos = vec(canvas.width * .5, canvas.height * .5).sub(size.div(2));
+    Button(pos, size, "Sua Pontuação foi: " + Player.score);
+    size = vec(canvas.width * .1, canvas.height * .08);
+    pos = vec(canvas.width * .5, canvas.height * .8).sub(size.div(2));
     if (Button(pos, size, "Continuar"))
     {
         if (++map_index == maps.length)
@@ -1509,6 +1588,7 @@ function RenderScore()
         manager.map = maps[map_index];
         gui.Reset();
         game_state = 2;
+        Player.score = 0;
     }
     gui.selected_entity = null;
     gui.selected_turret = null;
@@ -1559,9 +1639,9 @@ function Update()
         case 2:
         manager.Update();
         gui.Update();
-        if (manager.map.core.life == 0)
+        if (manager.game_over)
             game_state = 1;
-        else if (manager.map.finished && !manager.entities.filter(e => { return e instanceof Enemy; }).length)
+        else if (manager.level_completed)
             game_state = 3;
         break;
     }
@@ -1592,7 +1672,6 @@ function Render()
         RenderTutorial();
         break;
     }
-    // RenderCircle(Input.mousePos, 5, "#F00", "#000", 1);
 }
 
 let lastRender = 0;
