@@ -48,10 +48,10 @@
                         echo "
                         <div class=\"col-12 col-sm-6 col-md-6 perfil-sobre-nos\">
                             <div class=\"row perfil-moldura\">
-                                <div class=\"col-12 col-sm-4 col-md-4 img-container\">
+                                <div class=\"col-12 col-sm-12 col-md-4 img-container\">
                                     <a href=\"https://facebook.com/profile.php?id=$ID\"><img alt=\"#\" src=\"https://graph.facebook.com/$ID/picture?type=large\" class=\"img-thumbnail foto-perfil\"/></a>
                                 </div>
-                                <div class=\"col-12 col-sm-8 col-md-8\">
+                                <div class=\"col-12 col-sm-12 col-md-8\">
                                     <h5>$NOME</h5>
                                     <p>$DESCR</p>
                                     <p>$FUNC</p>
