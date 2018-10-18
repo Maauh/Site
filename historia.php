@@ -141,11 +141,7 @@
             <p class="pb-5">O robô foi finalizado dentro do prazo fizemos algumas adaptações </p>
             <img class="img-fluid" src="imagem/sobre/robo.jpeg" alt="quase" width="500px" height="400px">
         </div>
-        <footer class="page-footer font-small cyan darken-3">
-            <div class="footer-copyright text-center py-3">
-                &copy; 2018 Copyright, Todos os Direitos Reservados. Criação e implementação Grupo Potatoes Party.
-            </div>
-        </footer>
+        <?php include "mini/footer.php";?>
     </div>
 </body>
 

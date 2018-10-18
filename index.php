@@ -47,12 +47,6 @@
           else
             include_once "mini/login.php";
         ?>
-        <p>
-            <?php if(isset($_SESSION['loginErro'])){
-                echo $_SESSION['loginErro'];
-                unset($_SESSION['loginErro']);
-            }?>
-        </p>
         <br>
       </div>
     </div>

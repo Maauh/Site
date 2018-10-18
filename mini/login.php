@@ -1,4 +1,4 @@
-<form class="form-signin" method="POST" action="valida.php">
+<form class="form-signin" method="POST" action="php/entrar.php">
     <h2 class="form-signin-heading">Login</h2><br>
 
     <label for="inputUser" class="sr-only">Usuário</label>

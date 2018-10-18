@@ -9,6 +9,6 @@
 		$query = mysqli_query($conn, "SELECT * FROM usuarios WHERE USUARIO = '$user' AND SENHA = '$pass' LIMIT 1");
 		$_SESSION['user'] = mysqli_fetch_assoc($query);
 		
-		header("Location: index.php");
+		header("Location: ../index.php");
 	}
 ?>

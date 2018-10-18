@@ -16,11 +16,8 @@
 			echo "ERROR: Could not able to execute." . mysqli_error($conn);
 		}
 		mysqli_close($conn);
-		// header("Location: robocup.php");
+		header("Location: ../robocup.php");
 	}
 	else
-	{
-		echo 'error';
-	}
-	
+		echo "Erro de conexão";
 ?>
