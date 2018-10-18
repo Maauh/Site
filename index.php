@@ -41,30 +41,24 @@
       </div>
       <div class="col-12 col-sm-12 col-md-6">
         <?php
-          if (isset($_SESSION))
-            echo MEME
-
-        ?>
-        <form class="form-signin" method="POST" action="valida.php">
-          <h2 class="form-signin-heading">Login</h2>
-          <label for="inputEmail" class="sr-only">Email</label>
-          <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus><br>
-          <label for="inputPassword" class="sr-only">Senha</label>
-          <input type="password" name="senha" id="inputPassword" class="form-control" placeholder="Senha" required><br>
-          <button class="btn btn-lg btn-danger btn-block" type="submit">Acessar</button>
-        </form>
-      <p class="text-center text-danger">
-        <?php if(isset($_SESSION['loginErro'])){
-          echo $_SESSION['loginErro'];
-          unset($_SESSION['loginErro']);
-        }?>
-      </p>
-      <p class="text-center text-success">
-        <?php 
-        if(isset($_SESSION['logindeslogado'])){
-          echo $_SESSION['logindeslogado'];
-          unset($_SESSION['logindeslogado']);
-        }
+          session_start();
+          if (isset($_SESSION['logado']) && $_SESSION['logado'] == 1)
+          {
+            echo '
+            <h1>Bem Vindo '.$_SESSION['usuarioNome'].'</h1><br>
+            <a class="btn btn-secondary btn-lg btn-block" href="sair.php">Sair</a>
+            ';
+          }
+          else
+            echo '
+            <form class="form-signin" method="POST" action="valida.php">
+              <h2 class="form-signin-heading">Login</h2>
+              <label for="inputEmail" class="sr-only">Email</label>
+              <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus><br>
+              <label for="inputPassword" class="sr-only">Senha</label>
+              <input type="password" name="senha" id="inputPassword" class="form-control" placeholder="Senha" required><br>
+              <button class="btn btn-lg btn-danger btn-block" type="submit">Acessar</button>
+            </form>';
         ?>
         <br>
       </div>
