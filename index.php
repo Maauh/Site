@@ -43,34 +43,10 @@
         <?php
           session_start();
           if (isset($_SESSION['user']))
-          {
-            echo '
-            <h1>Bem Vindo Administrador '.$_SESSION['user']['NOME'].'</h1><br>
-            <p>O site já pode ser modificado agora.</p>
-            <div class="page-footer">
-              <a class="btn btn-secondary btn-lg btn-block" href="sair.php">Sair</a>
-            </div>
-            ';
-          }
+            include_once "mini/perfil.php";
           else
-          {
-            echo '
-            <form class="form-signin" method="POST" action="valida.php">
-              <h2 class="form-signin-heading">Login</h2><br>
-
-              <label for="inputUser" class="sr-only">Usuário</label>
-              <input type="text" name="username" id="inputUser" class="form-control" placeholder="Usuário" required autofocus><br>
-
-              <label for="inputPassword" class="sr-only">Senha</label>
-              <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Senha" required><br>
-
-              <button class="btn btn-lg btn-danger btn-block" type="submit">Entrar</button>
-            </form>
-            ';
-          }
-            
+            include_once "mini/login.php";
         ?>
-        
         <p>
             <?php if(isset($_SESSION['loginErro'])){
                 echo $_SESSION['loginErro'];
@@ -80,13 +56,8 @@
         <br>
       </div>
     </div>
-
-      <footer class="page-footer font-small cyan darken-3">
-        <div class="footer-copyright text-middle py-3">
-          &copy; 2018 Copyright, Todos os Direitos Reservados. Criação e implementação Grupo Potatoes Party.
-        </div>
-      </footer>
-    </div>
+    <?php include "mini/footer.php";?>
+  </div>
 </body>
 
 </html>
