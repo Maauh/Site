@@ -45,25 +45,44 @@
           if (isset($_SESSION['logado']) && $_SESSION['logado'] == 1)
           {
             echo '
-            <h1>Bem Vindo '.$_SESSION['usuarioNome'].'</h1><br>
-            <a class="btn btn-secondary btn-lg btn-block" href="sair.php">Sair</a>
+            <h1>Bem Vindo Administrador '.$_SESSION['NOME'].'</h1><br>
+            <p>O site já pode ser modificado agora.</p>
+            <div class="page-footer">
+              <a class="btn btn-secondary btn-lg btn-block" href="sair.php">Sair</a>
+            </div>
             ';
           }
           else
+          {
             echo '
             <form class="form-signin" method="POST" action="valida.php">
-              <h2 class="form-signin-heading">Login</h2>
-              <label for="inputEmail" class="sr-only">Email</label>
-              <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus><br>
+              <h2 class="form-signin-heading">Login</h2><br>
+
+              <label for="inputUser" class="sr-only">Usuário</label>
+              <input type="text" name="username" id="inputUser" class="form-control" placeholder="Usuário" required autofocus><br>
+
               <label for="inputPassword" class="sr-only">Senha</label>
-              <input type="password" name="senha" id="inputPassword" class="form-control" placeholder="Senha" required><br>
-              <button class="btn btn-lg btn-danger btn-block" type="submit">Acessar</button>
-            </form>';
+              <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Senha" required><br>
+
+              <button class="btn btn-lg btn-danger btn-block" type="submit">Entrar</button>
+            </form>
+            ';
+          }
+            
         ?>
+        
+        <p>
+            <?php if(isset($_SESSION['loginErro'])){
+                echo $_SESSION['loginErro'];
+                unset($_SESSION['loginErro']);
+            }?>
+        </p>
         <br>
       </div>
+    </div>
+
       <footer class="page-footer font-small cyan darken-3">
-        <div class="footer-copyright text-center py-3">
+        <div class="footer-copyright text-middle py-3">
           &copy; 2018 Copyright, Todos os Direitos Reservados. Criação e implementação Grupo Potatoes Party.
         </div>
       </footer>
