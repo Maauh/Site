@@ -8,12 +8,9 @@
 		$TITULO = $_POST['TITULO'];
 		$IMGURL = $_POST['IMGURL'];
 		$DESCR = $_POST['DESCR'];
-		$sql = "INSERT INTO `robocup` (`TITULO`, `IMGURL`, `DESCR`, `DAT`) VALUES ('$TITULO', '$IMGURL', '$DESCR', '$date')";
-		if(mysqli_query($conn, $sql)){
-			echo "Records inserted successfully.";
-		} else{
-			echo "ERROR: Could not able to execute." . mysqli_error($conn);
-		}
+		$ID = $_POST['ID'];
+		$sql = "UPDATE `robocup` SET TITULO = '$TITULO', IMGURL = '$IMGURL', DESCR = '$DESCR' WHERE ID = '$ID'";
+		$conn->query($sql);
 		mysqli_close($conn);
 		header("Location: ../robocup.php");
 	}

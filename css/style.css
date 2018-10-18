@@ -99,10 +99,11 @@
 .robocup-card div{
     padding: 25px 15px;
     justify-content: center;
-    /* align-self: center; */
+    align-self: center;
 }
 .robocup-card div img{
-    margin: auto;
+    /* margin: auto; */
     padding: 0;
     border: solid 2px black;
+    align-self: center;
 }
