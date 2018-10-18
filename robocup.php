@@ -89,12 +89,9 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Laboratorio de Programação</p><br>
-                        <p>Modelos e Estruturas de Computadores</p><br>
-                        <p>Sensores e Circuitos Digitais</p><br>
-                        <p>Sistemas de Informação</p><br>
-                        <p>Storytelling e Inspiração Empreendedora</p><br>
-                        <p>Web Standards and Game Developing</p>
+                        <form action="">
+                            <label for="inputText"></label><input type="text" name="" id="inputText">
+                        </form>
                     </div>
                 </div>
             </div>
