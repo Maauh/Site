@@ -36,25 +36,22 @@
         <div class="container">
             <div class="row">
                 <?php
-                    // $conexao = mysqli_connect('localhost','id7472579_admin', 'password', 'id7472579_dados') or die ("A conexão não foi executada com sucesso");
-                    $conexao = mysqli_connect('localhost','root', '', 'dados') or die ("A conexão não foi executada com sucesso");
-                    $conexao->set_charset("utf-8");
-                    $consulta = "SELECT NOME, ID, DESCR, FUNC FROM integrantes";
-                    $resultado = mysqli_query($conexao,$consulta);
-                    while(list($NOME, $ID, $DESCR, $FUNC) = mysqli_fetch_row($resultado)) {
-                        //$NOME = utf8_encode($NOME);
-                        //$DESCR = utf8_encode($DESCR);
-                        //$FUNC = utf8_encode($FUNC);
+                    // $link = mysqli_connect('localhost','id7472579_admin', 'password', 'id7472579_dados') or die ("A conexão não foi executada com sucesso");
+                    $link = mysqli_connect('localhost','root', '', 'dados') or die ("A conexão não foi executada com sucesso");
+                    $link->set_charset("utf-8");
+                    $sql = "SELECT * FROM usuarios WHERE INTEGRANTE = '1'";
+                    $result = mysqli_query($link, $sql);
+                    while(list($ID, $NOME, $USUARIO, $SENHA, $INTEGRANTE, $FBID, $DESCRICAO, $FUNCAO) = mysqli_fetch_row($result)) {
                         echo "
                         <div class=\"col-12 col-sm-6 col-md-6 perfil-sobre-nos\">
                             <div class=\"row perfil-moldura\">
                                 <div class=\"col-12 col-sm-12 col-md-4 img-container\">
-                                    <a href=\"https://facebook.com/profile.php?id=$ID\"><img alt=\"#\" src=\"https://graph.facebook.com/$ID/picture?type=large\" class=\"img-thumbnail foto-perfil\"/></a>
+                                    <a href=\"https://facebook.com/profile.php?id=$FBID\"><img alt=\"#\" src=\"https://graph.facebook.com/$FBID/picture?type=large\" class=\"img-thumbnail foto-perfil\"/></a>
                                 </div>
                                 <div class=\"col-12 col-sm-12 col-md-8\">
                                     <h5>$NOME</h5>
-                                    <p>$DESCR</p>
-                                    <p>$FUNC</p>
+                                    <p>$DESCRICAO</p>
+                                    <p>$FUNCAO</p>
                                 </div>
                             </div>
                         </div>";

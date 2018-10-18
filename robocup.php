@@ -33,41 +33,45 @@
     </nav>
     <div class="container1">
         <div class="container">
-            <div class="row">
                 <?php
                     session_start();
-                    if (isset($_SESSION['logado']) && $_SESSION['logado'] == 1)
-                    {
+                    $edit_mode = isset($_SESSION['user']);
+                    if ($edit_mode)
                         echo '<a class="btn btn-secondary btn-lg btn-block" href="#" data-toggle="modal" data-target="#caixa1">Adicionar Notícia</a>';
-                    }
 
                     // $conexao = mysqli_connect('localhost','id7472579_admin', 'password', 'id7472579_dados') or die ("A conexão não foi executada com sucesso");
                     $conexao = mysqli_connect('localhost','root', '', 'dados') or die ("A conexão não foi executada com sucesso");
                     $conexao->set_charset("utf-8");
-                    $consulta = "SELECT TITULO, IMGURL, DESCR, TEXTO, DAT FROM robocup";
+                    $consulta = "SELECT TITULO, IMGURL, DESCR, DAT FROM robocup";
                     $resultado = mysqli_query($conexao,$consulta);
-                    while(list($TITULO, $IMGURL, $DESCR, $TEXTO, $DAT) = mysqli_fetch_row($resultado)) {
-                        echo '
-                        <div class="row robocup-card">
-                            <div class="col-12 col-sm-12 col-md-6 img-container">
-                                <img alt="#" src="$IMGURL" class="img-thumbnail"/>
+                    while(list($TITULO, $IMGURL, $DESCR, $DAT) = mysqli_fetch_row($resultado)) {
+                        echo "
+                        <div class=\"row robocup-card\">
+                            <div class=\"col-12 col-sm-12 col-md-6 img-container\">
+                                <img alt=\"#\" src=\"$IMGURL\" class=\"img-thumbnail\"/>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-6">
-                                <a class="btn btn-secondary btn-lg btn-block" href="#">$TITULO</a><br>
+                            <div class=\"col-12 col-sm-12 col-md-6\">
+                                <div class=\"modal-header\">
+                                    <a class=\"btn btn-secondary btn-lg btn-block\" href=\"#\">$TITULO</a><br>
+                                </div>
                                 <p>$DESCR</p>
                             </div>
-                            <div style="padding: 0;" class="row">
-                                <div class="col">
+                            <div style=\"padding: 0;\" class=\"container\">
+                                <div class=\"float-left\">
                                     <p>$DAT</p>
                                 </div>
-                                <div class="col">
-                                    <a href="" class="btn btn-lg btn-danger btn-block"></a>
+                                <div class=\"float-middle\">";
+                                    if ($edit_mode)
+                                    {
+                                        echo "<a href=\"\" class=\"btn btn-lg btn-primary btn-block\">Editar</a>";
+                                        echo "<a href=\"\" class=\"btn btn-lg btn-danger btn-block\">Excluir</a>";
+                                    }
+                                echo "    
                                 </div>
                             </div>
-                        </div>';
+                        </div>";
                     }
                 ?>
-            </div>
         </div>
         
         <footer class="page-footer font-small cyan darken-3">

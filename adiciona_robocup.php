@@ -1,9 +1,26 @@
 <?php
 	session_start();	
-	$conn = mysqli_connect('localhost','root', '', 'dados') or die ("A conexão não foi executada com sucesso");
-	date_default_timezone_set("Etc/GMT+3");
-	$date = date('m/d/Y h:i:s a', time());
-	// echo $_POST['TITULO'].",".$_POST['IMGURL'].",". $_POST['DESCR'].",". null.",". $date;
-	$conn->query("INSERT INTO robocup (TITULO, IMGURL, DESCR, DAT) VALUES (".$_POST['TITULO'].",".$_POST['IMGURL'].",". $_POST['DESCR'].",". $date.")");
-	header("Location: robocup.php");
+	$conn = mysqli_connect('localhost','root', '', 'dados');
+	if ($conn)
+	{
+		date_default_timezone_set("Etc/GMT+3");
+		$date = date('d/m/Y h:i a', time());
+		$TITULO = $_POST['TITULO'];
+		$IMGURL = $_POST['IMGURL'];
+		$DESCR = $_POST['DESCR'];
+		$sql = "INSERT INTO `robocup` (`TITULO`, `IMGURL`, `DESCR`, `DAT`) VALUES ('$TITULO', '$IMGURL', '$DESCR', '$date')";
+		echo $sql."<br>";
+		if(mysqli_query($conn, $sql)){
+			echo "Records inserted successfully.";
+		} else{
+			echo "ERROR: Could not able to execute." . mysqli_error($conn);
+		}
+		mysqli_close($conn);
+		// header("Location: robocup.php");
+	}
+	else
+	{
+		echo 'error';
+	}
+	
 ?>

@@ -42,10 +42,10 @@
       <div class="col-12 col-sm-12 col-md-6">
         <?php
           session_start();
-          if (isset($_SESSION['logado']) && $_SESSION['logado'] == 1)
+          if (isset($_SESSION['user']))
           {
             echo '
-            <h1>Bem Vindo Administrador '.$_SESSION['NOME'].'</h1><br>
+            <h1>Bem Vindo Administrador '.$_SESSION['user']['NOME'].'</h1><br>
             <p>O site já pode ser modificado agora.</p>
             <div class="page-footer">
               <a class="btn btn-secondary btn-lg btn-block" href="sair.php">Sair</a>

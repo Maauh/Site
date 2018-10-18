@@ -6,16 +6,9 @@
 		$user = mysqli_real_escape_string($conn, $_POST['username']);
 		$pass = mysqli_real_escape_string($conn, $_POST['password']);
 			
-		$query = mysqli_query($conn, "SELECT * FROM usuarios WHERE USERNAME = '$user' AND PASS = '$pass' LIMIT 1");
-		$resultado = mysqli_fetch_assoc($query);
-
-		if(isset($resultado))
-		{
-			$_SESSION['logado'] = 1;
-			$_SESSION['ID'] = $resultado['ID'];
-			$_SESSION['NOME'] = $resultado['NOME'];
-			$_SESSION['PASS'] = $resultado['PASS'];
-		}
+		$query = mysqli_query($conn, "SELECT * FROM usuarios WHERE USUARIO = '$user' AND SENHA = '$pass' LIMIT 1");
+		$_SESSION['user'] = mysqli_fetch_assoc($query);
+		
 		header("Location: index.php");
 	}
 ?>

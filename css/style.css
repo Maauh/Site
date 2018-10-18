@@ -90,6 +90,7 @@
     box-shadow: 0 0 2px 1px black;
 }
 .robocup-card{
+    margin: 15px;
     text-align: center;
     border-radius: 1%;
     border: solid 1px black;
@@ -97,7 +98,11 @@
 }
 .robocup-card div{
     padding: 25px 15px;
+    justify-content: center;
+    /* align-self: center; */
 }
 .robocup-card div img{
-    padding: 25px 15px;
+    margin: auto;
+    padding: 0;
+    border: solid 2px black;
 }
