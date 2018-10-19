@@ -55,7 +55,6 @@
         <div class="modal fade" id="caixa1" tabindex="-1" role="dialog">
             <?php include "mini/historia_add_form.php";?>
         </div>
-        <?php include "mini/footer.php";?>
     </div>
 </body>
 
