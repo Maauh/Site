@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 18-Out-2018 às 23:59
+-- Generation Time: 19-Out-2018 às 05:45
 -- Versão do servidor: 10.1.36-MariaDB
 -- versão do PHP: 7.2.10
 
@@ -25,6 +25,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `historia`
+--
+
+CREATE TABLE `historia` (
+  `ID` int(11) NOT NULL,
+  `TITULO` text,
+  `IMGURL` text,
+  `DESCR` text,
+  `DAT` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `robocup`
 --
 
@@ -35,16 +49,6 @@ CREATE TABLE `robocup` (
   `DESCR` text,
   `DAT` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `robocup`
---
-
-INSERT INTO `robocup` (`ID`, `TITULO`, `IMGURL`, `DESCR`, `DAT`) VALUES
-(1, 'Musaranho', 'https://www.estudokids.com.br/wp-content/uploads/2014/07/musaranho.jpg', 'Se lhe perguntarem qual é o menor mamífero do planeta, o que você responderia? Acertou quem respondeu o musaranho! Pois bem, entre as várias espécies de musaranho já catalogado no mundo, existe uma que é caracterizada como a de menor tamanho entre os mamíferos.', NULL),
-(3, 'Naja', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Indiancobra.jpg/375px-Indiancobra.jpg', 'As diferentes espÃ©cies Naja existentes variam de comprimento e sÃ£o, na sua maioria, de corpo delgado. Grande parte sÃ£o capazes de atingir comprimentos de 1,84 m. O comprimento mÃ¡ximo de algumas das maiores espÃ©cies de cobra sÃ£o em torno de 3,1 m, com a Naja ashei (2,7 m), sendo a maior da espÃ©cie e encontrada na QuÃªnia de acordo com a ONG que cuida da preservaÃ§Ã£o de rÃ©pteis WildlifeDirect. Ainda de acordo com a organizaÃ§Ã£o, a referida espÃ©cie possui veneno suficiente para matar 15 humanos adultos.[5] Outra com tamanho avantajado Ã© a Naja melanoleuca (1,50 m), que pode crescer atÃ© cerca de 3,0 m.[6] Todas tÃªm uma capacidade caracterÃ­stica de levantar os quartos dianteiros de seus corpos do chÃ£o e achatar seus pescoÃ§os para parecer maior para um predador em potencial.', '18/10/2018 05:12 pm'),
-(4, 'TardÃ­grado', 'https://ciencianautas.com/wp-content/uploads/2017/11/1_Tardigrado-800x498.jpg', 'O animal mais resistente do planeta Terra Ã© microscÃ³pico. Ele tem apenas meio milÃ­metro de comprimento e pode ser encontrado em todos os lugares, pois vive na camada aquosa de musgos e lÃ­quenes de todo o planeta. Esse Ã© o tardÃ­grado, tambÃ©m conhecido como â€œurso dâ€™Ã¡guaâ€ por sua maneira particular de andar semelhante ao desses potentes mamÃ­feros. O tardÃ­grado Ã© um dos micro-animais mais fascinantes da Terra e, toda vez que Ã© descoberto algo novo sobre o seu genoma, aparece nas revistas cientÃ­ficas mais prestigiadas. Mas o que esse animal tem para capturar toda a atenÃ§Ã£o da comunidade cientÃ­fica?', '18/10/2018 05:35 pm'),
-(6, 'OnÃ§a-Pintada', 'https://static.todamateria.com.br/upload/57/bf/57bf43483180b-onca-pintada.jpg', 'A OnÃ§a-Pintada, tambÃ©m chamada de Jaguar, Ã© o maior felino das AmÃ©ricas e o terceiro maior do mundo, depois dos tigres e dos leÃµes.\r\n\r\nTrata-se de um animal predador (que estÃ¡ no topo da cadeia alimentar), carnÃ­voro e vertebrado (possui vÃ©rtebras). Pertence Ã  ordem carnÃ­vora e Ã  famÃ­lia felidae. Seu nome cientÃ­fico Ã© Panthera onca.', '18/10/2018 06:16 pm');
 
 -- --------------------------------------------------------
 
@@ -80,9 +84,9 @@ INSERT INTO `usuarios` (`ID`, `NOME`, `USUARIO`, `SENHA`, `INTEGRANTE`, `FBID`, 
 --
 
 --
--- Indexes for table `robocup`
+-- Indexes for table `historia`
 --
-ALTER TABLE `robocup`
+ALTER TABLE `historia`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -96,10 +100,10 @@ ALTER TABLE `usuarios`
 --
 
 --
--- AUTO_INCREMENT for table `robocup`
+-- AUTO_INCREMENT for table `historia`
 --
-ALTER TABLE `robocup`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+ALTER TABLE `historia`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
