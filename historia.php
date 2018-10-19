@@ -45,7 +45,7 @@
                         $consulta = "SELECT ID, TITULO, IMGURL, DESCR, DAT FROM historia";
                         $resultado = mysqli_query($conexao,$consulta);
                         while(list($ID, $TITULO, $IMGURL, $DESCR, $DAT) = mysqli_fetch_row($resultado)) {
-                            include "mini/robocup_card.php";
+                            include "mini/historia_card.php";
                         }
                     ?>
             </div>
