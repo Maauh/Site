@@ -26,7 +26,8 @@
           <li class="nav-item"><a class="nav-link" href="robocup.php">RobôCup</a></li>
           <li class="nav-item"><a class="nav-link " href="historia.php">Historia do Robô</a></li>
           <li class="nav-item"><a class="nav-link" href="sobre.php">Integrantes</a></li>
-          <li class="nav-item"><a class="nav-link" href="diversao.html">Diversão</a></li>
+          <li class="nav-item"><a class="nav-link" href="diversao.php">Diversão</a></li>
+					<li class="nav-item"><a class="nav-link" href="administracao.php">Administração</a></li>
         </ul>
       </div>
     </div>
@@ -38,16 +39,6 @@
     <div class="row">
       <div class="col-12 col-sm-12 col-md-6 img-container">
         <img alt="#" src="imagem/nos.jpg" class="img-thumbnail" />
-      </div>
-      <div class="col-12 col-sm-12 col-md-6">
-        <?php
-          session_start();
-          if (isset($_SESSION['user']))
-            include_once "mini/perfil.php";
-          else
-            include_once "mini/login.php";
-        ?>
-        <br>
       </div>
     </div>
     <?php include "mini/footer.php";?>

@@ -1,5 +1,6 @@
 <?php
 	session_start();	
+	// $conn = mysqli_connect('localhost','id7472579_admin', 'password', 'id7472579_dados') or die ("A conexão não foi executada com sucesso");
 	$conn = mysqli_connect('localhost','root', '', 'dados');
 	if ($conn)
 	{

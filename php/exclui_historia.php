@@ -6,10 +6,10 @@
 	{
 		date_default_timezone_set("Etc/GMT+3");
 		$ID = $_POST['ID'];
-		$sql = "DELETE FROM `robocup` WHERE ID = '$ID'";
+		$sql = "DELETE FROM `historia` WHERE ID = '$ID'";
 		$conn->query($sql);
 		mysqli_close($conn);
-		header("Location: ../robocup.php");
+		header("Location: ../historia.php");
 	}
 	else
 		echo "Erro de conexão";

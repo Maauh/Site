@@ -23,21 +23,22 @@
 					<li class="nav-item"><a class="nav-link" href="robocup.php">RobôCup</a></li>
 					<li class="nav-item"><a class="nav-link " href="historia.php">Historia do Robô</a></li>
 					<li class="nav-item"><a class="nav-link" href="sobre.php">Integrantes</a></li>
-					<li class="nav-item active"><a class="nav-link" href="diversao.php">Diversão</a></li>
-					<li class="nav-item"><a class="nav-link" href="administracao.php">Administração</a></li>
+					<li class="nav-item"><a class="nav-link" href="diversao.php">Diversão</a></li>
+					<li class="nav-item active"><a class="nav-link" href="administracao.php">Administração</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<div class="container1">
-		<div class="row">
-            <div class="col-10 col-sm-10 col-md-8 col-lg-12 col-xl-12" style="margin: 0 auto;">
-                <canvas id="canvas" class="img-thumbnail game-canvas" width="1000" height="720"></canvas>
-            </div>
-        </div>
-    <?php include "mini/footer.php";?>
+		<?php
+          session_start();
+          if (isset($_SESSION['user']))
+            include_once "mini/perfil.php";
+          else
+            include_once "mini/login.php";
+        ?>
+		<?php include "mini/footer.php";?>
 	</div>
-	<script src="js/script.js"></script>
 </body>
 
 </html>

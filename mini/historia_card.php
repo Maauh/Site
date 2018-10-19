@@ -1,4 +1,4 @@
-<div class="row blog-card">
+<div class="row historia-card">
     <div class="col-12 col-sm-12 col-md-6 img-container">
         <img alt="#" src=<?php echo $IMGURL;?> class="img-thumbnail"/>
     </div>
@@ -34,7 +34,7 @@
                 </button>
             </div>
             <div class="modal-body">
-            <form class="form-signin" method="POST" action="php/edita_robocup.php">
+            <form class="form-signin" method="POST" action="php/edita_historia.php">
                 <input type="text" name="ID" hidden value=<?php echo "\"$ID\""?> required>
                 <input type="text" name="TITULO" class="form-control" placeholder="Titulo" value=<?php echo "\"$TITULO\"" ?> required><br>
                 <input type="text" name="IMGURL" class="form-control" placeholder="IMGURL" value=<?php echo "\"$IMGURL\"" ?> required><br>
@@ -51,14 +51,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Você Realmente Deseja Excluir?</h5><br>
+                <h5 class="modal-title">Você Realmente Deseja Excluir?</h5>
             </div>
             <div class="modal-body">
-            <div>
-                <a class="btn btn-secondary btn-lg btn-block" href="#"><?php echo $TITULO;?></a><br>
-                <img alt="#" src=<?php echo $IMGURL;?> class="img-thumbnail"/><br><br>
-            </div>
-            <form class="form-signin" method="POST" action="php/exclui_robocup.php">
+            <form class="form-signin" method="POST" action="php/exclui_historia.php">
                 <input type="text" name="ID" hidden value=<?php echo "\"$ID\""?> required>
                 <button class="btn btn-danger float-left" type="submit">Sim</button>
                 <button class="btn btn-primary float-right" data-dismiss="modal">Não</button>

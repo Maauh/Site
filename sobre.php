@@ -26,7 +26,8 @@
                     <li class="nav-item"><a class="nav-link" href="robocup.php">RobôCup</a></li>
                     <li class="nav-item"><a class="nav-link " href="historia.php">Historia do Robô</a></li>
                     <li class="nav-item active"><a class="nav-link" href="sobre.php">Integrantes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="diversao.html">Diversão</a></li>
+                    <li class="nav-item"><a class="nav-link" href="diversao.php">Diversão</a></li>
+					<li class="nav-item"><a class="nav-link" href="administracao.php">Administração</a></li>
                 </ul>
             </div>
         </div>
@@ -42,28 +43,12 @@
                     $sql = "SELECT * FROM usuarios WHERE INTEGRANTE = '1'";
                     $result = mysqli_query($link, $sql);
                     while(list($ID, $NOME, $USUARIO, $SENHA, $INTEGRANTE, $FBID, $DESCRICAO, $FUNCAO) = mysqli_fetch_row($result)) {
-                        echo "
-                        <div class=\"col-12 col-sm-6 col-md-6 perfil-sobre-nos\">
-                            <div class=\"row perfil-moldura\">
-                                <div class=\"col-12 col-sm-12 col-md-4 img-container\">
-                                    <a href=\"https://facebook.com/profile.php?id=$FBID\"><img alt=\"#\" src=\"https://graph.facebook.com/$FBID/picture?type=large\" class=\"img-thumbnail foto-perfil\"/></a>
-                                </div>
-                                <div class=\"col-12 col-sm-12 col-md-8\">
-                                    <h5>$NOME</h5>
-                                    <p>$DESCRICAO</p>
-                                    <p>$FUNCAO</p>
-                                </div>
-                            </div>
-                        </div>";
+                        include "mini/sobre_card.php";
                     }
                 ?>	
             </div>
         </div>        
-        <footer class="page-footer font-small cyan darken-3">
-            <div class="footer-copyright text-center py-3">
-                &copy; 2018 Copyright, Todos os Direitos Reservados. Criação e implementação Grupo Potatoes Party.
-            </div>
-        </footer>
+		<?php include "mini/footer.php";?>
     </div>
 </body>
 

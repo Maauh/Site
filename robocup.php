@@ -26,7 +26,8 @@
                     <li class="nav-item active"><a class="nav-link" href="robocup.php">RobôCup</a></li>
                     <li class="nav-item"><a class="nav-link " href="historia.php">Historia do Robô</a></li>
                     <li class="nav-item"><a class="nav-link" href="sobre.php">Integrantes</a></li>
-                    <li class="nav-item"><a class="nav-link" href="diversao.html">Diversão</a></li>
+                    <li class="nav-item"><a class="nav-link" href="diversao.php">Diversão</a></li>
+					<li class="nav-item"><a class="nav-link" href="administracao.php">Administração</a></li>
                 </ul>
             </div>
         </div>
@@ -53,10 +54,6 @@
 
     <div class="modal fade" id="caixa1" tabindex="-1" role="dialog">
         <?php include "mini/robocup_add_form.php";?>
-    </div>
-
-    <div class="modal fade" id="caixa1" tabindex="-1" role="dialog">
-        <?php include "mini/robocup_edit_form.php";?>
     </div>
 
 </body>
