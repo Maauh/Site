@@ -1,3 +1,31 @@
-<h1>Bem Vindo Administrador <?php echo $_SESSION['user']['NOME'];?></h1><br>
-<p class="h1">O site já pode ser modificado agora.</p>
-<a class="btn btn-danger btn-lg btn-block" href="php/sair.php">Sair</a>
+<div class="sobre-card">
+    <h1>Bem Vindo Administrador <?php echo $_SESSION['user']['NOME'];?></h1><br>
+    <h3>O site já pode ser modificado agora.</h3><br>
+    <div class="row perfil-moldura">
+        <div class="col-12 col-sm-12 col-md-4 img-container">
+            <?php
+                $NOME = $_SESSION['user']['NOME'];
+                $FBID = $_SESSION['user']['FBID'];
+                $INTEGRANTE = $_SESSION['user']['INTEGRANTE'];
+                $NOME = $_SESSION['user']['NOME'];
+                $DESCRICAO = $_SESSION['user']['DESCRICAO'];
+                $FUNCAO = $_SESSION['user']['FUNCAO'];
+                echo "<a href=\"https://facebook.com/profile.php?id=$FBID\"><img alt=\"#\" src=\"https://graph.facebook.com/$FBID/picture?type=large\" class=\"img-thumbnail foto-perfil\"/></a>";
+            ?>
+        </div>
+        <div class="col-12 col-sm-12 col-md-8">
+            <form class="form-signin" method="POST" action="php/edita.php">
+                <input type="text" name="ID" hidden value=<?php echo $_SESSION['user']['ID']; if ($_SESSION['user']['INTEGRANTE']) echo "checked";?> required><br>
+                <input type="checkbox" name="INTEGRANTE" id="cbIntegrante">Você é um integrante do grupo?<br><br>
+                <input type="text" name="NOME" class="form-control" placeholder="Nome" value=<?php echo $_SESSION['user']['NOME'];?> required><br>
+                <input type="text" name="FBID" class="form-control" placeholder="Facebook Id" value=<?php echo $_SESSION['user']['FBID'];?> required><br>
+                <textarea name="DESCRICAO" class="form-control" rows="5" placeholder="Descrição" required><?php echo $_SESSION['user']['DESCRICAO'];?></textarea><br>
+                <textarea name="FUNCAO" class="form-control" rows="5" placeholder="Função" required><?php echo $_SESSION['user']['FUNCAO'];?></textarea><br>
+                <div class="page-footer font-small cyan darken-3">
+                    <button class="btn btn-primary float-right" type="submit">Editar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <a class="btn btn-danger btn-lg btn-block" href="php/sair.php">Sair</a>
+</div>
