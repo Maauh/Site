@@ -21,7 +21,11 @@
                 <?php
                     session_start();
                     if (isset($_SESSION['user']))
-                        echo '<a class="btn btn-secondary btn-lg btn-block" href="#" data-toggle="modal" data-target="#caixa1">Adicionar Notícia</a>';
+                    {
+                        $_SESSION['TABLENAME'] = "robocup";
+                        $_SESSION['RETURN'] = "robocup.php";
+                        echo '<a class="btn btn-primary btn-lg btn-block" href="#" data-toggle="modal" data-target="#caixa1">Adicionar Notícia</a>';
+                    }
                     // $conexao = mysqli_connect('localhost','id7472579_admin', 'password', 'id7472579_dados') or die ("A conexão não foi executada com sucesso");
                     $conexao = mysqli_connect('localhost','root', '', 'dados') or die ("A conexão não foi executada com sucesso");
                     $conexao->set_charset("utf-8");
@@ -38,9 +42,7 @@
     </div>
 
     <div class="modal fade" id="caixa1" tabindex="-1" role="dialog">
-        <?php
-            $_SESSION['TABLENAME'] = "robocup";
-            $_SESSION['RETURN'] = "robocup.php";
+        <?php            
             include "mini/add_form.php";
         ?>
     </div>

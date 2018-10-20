@@ -4,7 +4,7 @@
             <img alt="#" src=<?php echo $IMGURL;?> class="img-thumbnail"/>
         </div>
         <div class="col-12 col-sm-12 col-md-6">
-            <p class="h1 text-light bg-secondary" href="#"><?php echo $TITULO;?></p><br>
+            <p class="h1 text-light bg-primary" href="#"><?php echo $TITULO;?></p><br>
             <p><?php echo $DESCR;?></p>
         </div>
         <div style="padding: 0;" class="container">
@@ -12,7 +12,6 @@
                 if ($DAT)
                     echo "<p>Postado no dia $DAT</p><br>";
                 ?>
-            
         </div>
     </div>
     <div class="">
@@ -33,15 +32,15 @@
                 <h5 class="modal-title">Você Realmente Deseja Excluir?</h5><br>
             </div>
             <div class="modal-body">
-            <div>
-                <a class="btn btn-secondary btn-lg btn-block" href="#"><?php echo $TITULO;?></a><br>
-                <img alt="#" src=<?php echo $IMGURL;?> class="img-thumbnail"/><br><br>
-            </div>
-            <form class="form-signin" method="POST" action="php/exclui_robocup.php">
-                <input type="text" name="ID" hidden value=<?php echo "\"$ID\""?> required>
-                <button class="btn btn-danger float-left" type="submit">Sim</button>
-                <button class="btn btn-primary float-right" data-dismiss="modal">Não</button>
-            </form>
+                <div>
+                    <img alt="#" src=<?php echo $IMGURL;?> class="img-thumbnail"/>
+                    <p class="h1 text-light bg-primary blog-text" href="#"><?php echo $TITULO;?></p><br>
+                </div>
+                <form class="form-signin" method="POST" action="php/exclui_robocup.php">
+                    <input type="text" name="ID" hidden value=<?php echo "\"$ID\""?> required>
+                    <button class="btn btn-danger float-left" type="submit">Sim</button>
+                    <button class="btn btn-primary float-right" data-dismiss="modal">Não</button>
+                </form>
             </div>
         </div>
     </div>

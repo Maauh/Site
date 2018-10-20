@@ -90,7 +90,7 @@
     box-shadow: 0 0 2px 1px black;
 }
 .blog-card{
-    margin: 15px;
+    margin: 15px auto;
     padding: 20px;
     text-align: center;
     border-radius: 1%;
@@ -101,10 +101,12 @@
 .blog-card div{
     margin-top: 10px;
 }
-.blog-card div div img{
+.blog-card div div{
+    padding: 15px;
     justify-content: center;
     align-self: center;
 }
-.blog-card div div p{
-    
+.blog-text{
+    border-radius: 5px;
+    overflow-wrap: break-word;
 }
