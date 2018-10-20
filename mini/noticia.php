@@ -16,8 +16,8 @@
             <?php
             if ($edit_mode)
             {
-                echo "<a href="" class="btn btn-lg btn-primary btn-block">Editar</a>";
-                echo "<a href="" class="btn btn-lg btn-danger btn-block">Excluir</a>";
+                echo "<a href=\"\" class=\"btn btn-lg btn-primary btn-block\">Editar</a>";
+                echo "<a href=\"\" class=\"btn btn-lg btn-danger btn-block\">Excluir</a>";
             }
             ?>
         </div>
