@@ -36,8 +36,8 @@
             <div class="modal-body">
             <form class="form-signin" method="POST" action="php/edita_historia.php">
                 <input type="text" name="ID" hidden value=<?php echo "\"$ID\""?> required>
-                <input type="text" name="TITULO" class="form-control" placeholder="Titulo" value=<?php echo "\"$TITULO\"" ?> required><br>
-                <input type="text" name="IMGURL" class="form-control" placeholder="IMGURL" value=<?php echo "\"$IMGURL\"" ?> required><br>
+                <input type="text" name="TITULO" class="form-control" placeholder="Titulo" value=<?php echo "\"$TITULO\""?> required><br>
+                <input type="text" name="IMGURL" class="form-control" placeholder="IMGURL" value=<?php echo "\"$IMGURL\""?> required><br>
                 <textarea name="DESCR" cols="60" rows="5" placeholder="Descrição"><?php if ($DESCR) echo $DESCR ?></textarea>
                 <div class="page-footer font-small cyan darken-3">
                     <button class="btn btn-primary float-right" type="submit">Editar</button>

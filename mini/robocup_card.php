@@ -15,7 +15,7 @@
             ?>
         <div class="">
             <?php
-            if ($edit_mode)
+            if (isset($_SESSION['user']))
             {
                 echo "<a href=\"#\" class=\"btn btn-lg btn-primary btn-block\" data-toggle=\"modal\" data-target=\"#edit$ID\">Editar</a>";
                 echo "<a href=\"#\" class=\"btn btn-lg btn-danger btn-block\"  data-toggle=\"modal\" data-target=\"#delete$ID\">Excluir</a>";

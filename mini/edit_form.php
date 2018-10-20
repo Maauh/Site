@@ -7,10 +7,11 @@
             </button>
         </div>
         <div class="modal-body">
-        <form class="form-signin" method="POST" action="php/adiciona_historia.php">
+        <form class="form-signin" method="POST" action="php/edita.php\">
+            <input type="text" name="ID" hidden value=<?php echo "\"$ID\""?> required>
             <input type="text" name="TITULO" class="form-control" placeholder="Titulo" required><br>
-            <input type="text" name="IMGURL" class="form-control" placeholder="IMGURL" required><br>
-            <textarea name="DESCR" cols="60" rows="5" placeholder="Descrição"></textarea>
+            <input type="text" name="IMGURL" class="form-control" placeholder="URL" required><br>
+            <textarea class="form-control" name="DESCR" rows="12" placeholder="Descrição"></textarea><br>
             <div class="page-footer font-small cyan darken-3">
                 <button class="btn btn-danger float-right" type="submit">Adicionar</button>
             </div>

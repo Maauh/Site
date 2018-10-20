@@ -20,8 +20,7 @@
         <div class="container">
                 <?php
                     session_start();
-                    $edit_mode = isset($_SESSION['user']);
-                    if ($edit_mode)
+                    if (isset($_SESSION['user']))
                         echo '<a class="btn btn-secondary btn-lg btn-block" href="#" data-toggle="modal" data-target="#caixa1">Adicionar Notícia</a>';
                     // $conexao = mysqli_connect('localhost','id7472579_admin', 'password', 'id7472579_dados') or die ("A conexão não foi executada com sucesso");
                     $conexao = mysqli_connect('localhost','root', '', 'dados') or die ("A conexão não foi executada com sucesso");
@@ -29,15 +28,21 @@
                     $consulta = "SELECT ID, TITULO, IMGURL, DESCR, DAT FROM robocup";
                     $resultado = mysqli_query($conexao,$consulta);
                     while(list($ID, $TITULO, $IMGURL, $DESCR, $DAT) = mysqli_fetch_row($resultado)) {
-                        include "mini/robocup_card.php";
+                        // include "mini/robocup_card.php";
+                        include "mini/blog_card.php";
                     }
                 ?>
         </div>
         <?php include "mini/footer.php";?>
+        <?php include "php/teste.php";?>
     </div>
 
     <div class="modal fade" id="caixa1" tabindex="-1" role="dialog">
-        <?php include "mini/robocup_add_form.php";?>
+        <?php
+            $_SESSION['TABLENAME'] = "robocup";
+            $_SESSION['RETURN'] = "robocup.php";
+            include "mini/add_form.php";
+        ?>
     </div>
 
 </body>

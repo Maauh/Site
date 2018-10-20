@@ -13,7 +13,6 @@ $pages =
     "administracao.php" => "Administração",
 ];
 ?>
-
 <nav class="navbar navbar-expand-sm navbar-dark bg-gradient-primary ">
     <div class="container ">
         <a class="navbar-brand h1 mb-0" href="index.php">HOME</a>

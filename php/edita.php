@@ -1,0 +1,24 @@
+<?php
+	session_start();	
+	$conn = mysqli_connect('localhost','root', '', 'dados');
+	// $conn = mysqli_connect('localhost','id7472579_admin', 'password', 'id7472579_dados');
+	if ($conn)
+	{
+		date_default_timezone_set("Etc/GMT+3");
+		$date = date('d/m/Y h:i a', time());
+		$TITULO = $_POST['TITULO'];
+		$IMGURL = $_POST['IMGURL'];
+		$DESCR = $_POST['DESCR'];
+		$ID = $_POST['ID'];
+		$sql = "UPDATE ".$_SESSION['TABLENAME']." SET TITULO = '$TITULO', IMGURL = '$IMGURL', DESCR = '$DESCR' WHERE ID = '$ID'";
+		if(mysqli_query($conn, $sql)){
+			echo "Records changed successfully.";
+		} else{
+			echo "ERROR: Could not able to execute.".mysqli_error($conn);
+		}
+		mysqli_close($conn);
+		header("Location: ../../".$_SESSION['RETURN']);
+	}
+	else
+		echo "Erro de conexão";
+?>

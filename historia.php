@@ -37,7 +37,11 @@
         </div>
 
         <div class="modal fade" id="caixa1" tabindex="-1" role="dialog">
-            <?php include "mini/historia_add_form.php";?>
+        <?php
+            $_SESSION['TABLENAME'] = "historia";
+            $_SESSION['RETURN'] = "historia.php";
+            include "mini/add_form.php";
+        ?>
         </div>
     </div>
 </body>

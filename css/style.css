@@ -91,19 +91,20 @@
 }
 .blog-card{
     margin: 15px;
+    padding: 20px;
     text-align: center;
     border-radius: 1%;
     border: solid 1px black;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    overflow-wrap: break-word;
 }
 .blog-card div{
-    padding: 25px 15px;
+    margin-top: 10px;
+}
+.blog-card div div img{
     justify-content: center;
     align-self: center;
 }
-.blog-card div img{
-    /* margin: auto; */
-    padding: 0;
-    border: solid 2px black;
-    align-self: center;
+.blog-card div div p{
+    
 }
