@@ -110,3 +110,6 @@
     border-radius: 5px;
     overflow-wrap: break-word;
 }
+.text-break{
+    overflow-wrap: break-word;
+}

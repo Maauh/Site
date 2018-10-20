@@ -17,7 +17,7 @@
 			echo "ERROR: Could not able to execute.".mysqli_error($conn);
 		}
 		mysqli_close($conn);
-		header("Location: ../../".$_SESSION['RETURN']);
+		header("Location: ../".$_SESSION['RETURN']);
 	}
 	else
 		echo "Erro de conexão";

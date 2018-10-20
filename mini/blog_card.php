@@ -24,8 +24,30 @@
         ?>
     </div>
 </div>
-
-<div class="modal fade" id=<?php echo "\"delete$ID\"" ?> tabindex="-1" role="dialog">
+<div class="modal fade" id=<?php echo "\"edit$ID\"";?> tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Conteúdo</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <form class="form-signin" method="POST" action="php/edita.php">
+                <input type="text" name="ID" hidden value=<?php echo "\"$ID\""?> required>
+                <input type="text" name="TITULO" class="form-control" placeholder="Titulo" value=<?php echo "\"$TITULO\""?> required><br>
+                <input type="text" name="IMGURL" class="form-control" placeholder="IMGURL" value=<?php echo "\"$IMGURL\""?> required><br>
+                <textarea name="DESCR" class="form-control" rows="12" placeholder="Descrição"><?php if ($DESCR) echo $DESCR ?></textarea><br>
+                <div class="page-footer font-small cyan darken-3">
+                    <button class="btn btn-primary float-right" type="submit">Editar</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id=<?php echo "\"delete$ID\"";?> tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -36,7 +58,7 @@
                     <img alt="#" src=<?php echo $IMGURL;?> class="img-thumbnail"/>
                     <p class="h1 text-light bg-primary blog-text" href="#"><?php echo $TITULO;?></p><br>
                 </div>
-                <form class="form-signin" method="POST" action="php/exclui_robocup.php">
+                <form class="form-signin" method="POST" action="php/exclui.php">
                     <input type="text" name="ID" hidden value=<?php echo "\"$ID\""?> required>
                     <button class="btn btn-danger float-left" type="submit">Sim</button>
                     <button class="btn btn-primary float-right" data-dismiss="modal">Não</button>

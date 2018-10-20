@@ -20,25 +20,26 @@
         <div class="container">
                 <?php
                     session_start();
+                    $_SESSION['TABLENAME'] = "robocup";
+                    $_SESSION['RETURN'] = "robocup.php";
                     if (isset($_SESSION['user']))
-                    {
-                        $_SESSION['TABLENAME'] = "robocup";
-                        $_SESSION['RETURN'] = "robocup.php";
                         echo '<a class="btn btn-primary btn-lg btn-block" href="#" data-toggle="modal" data-target="#caixa1">Adicionar Notícia</a>';
+                    $conn = mysqli_connect('localhost','root', '', 'dados');
+                    // $conn = mysqli_connect('localhost','id7472579_admin', 'password', 'id7472579_dados');
+                    if ($conn)
+                    {
+                        $conn->set_charset("utf-8");
+                        $sql = "SELECT ID, TITULO, IMGURL, DESCR, DAT FROM ".$_SESSION['TABLENAME'];
+                        $result = mysqli_query($conn,$sql);
+                        while(list($ID, $TITULO, $IMGURL, $DESCR, $DAT) = mysqli_fetch_row($result)) {
+                            include "mini/blog_card.php";
+                        }
                     }
-                    // $conexao = mysqli_connect('localhost','id7472579_admin', 'password', 'id7472579_dados') or die ("A conexão não foi executada com sucesso");
-                    $conexao = mysqli_connect('localhost','root', '', 'dados') or die ("A conexão não foi executada com sucesso");
-                    $conexao->set_charset("utf-8");
-                    $consulta = "SELECT ID, TITULO, IMGURL, DESCR, DAT FROM robocup";
-                    $resultado = mysqli_query($conexao,$consulta);
-                    while(list($ID, $TITULO, $IMGURL, $DESCR, $DAT) = mysqli_fetch_row($resultado)) {
-                        // include "mini/robocup_card.php";
-                        include "mini/blog_card.php";
-                    }
+                    else
+                        echo "<p>Não foi possível fazer a conexão com o banco de dados.</p>"
                 ?>
         </div>
         <?php include "mini/footer.php";?>
-        <?php include "php/teste.php";?>
     </div>
 
     <div class="modal fade" id="caixa1" tabindex="-1" role="dialog">

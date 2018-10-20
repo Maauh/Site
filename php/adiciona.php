@@ -10,13 +10,10 @@
 		$IMGURL = $_POST['IMGURL'];
 		$DESCR = $_POST['DESCR'];
 		$sql = "INSERT INTO ".$_SESSION['TABLENAME']." (`TITULO`, `IMGURL`, `DESCR`, `DAT`) VALUES ('$TITULO', '$IMGURL', '$DESCR', '$date')";
-		if(mysqli_query($conn, $sql)){
-			echo "Records inserted successfully.";
-		} else{
-			echo "ERROR: Could not able to execute.".mysqli_error($conn);
-		}
-		mysqli_close($conn);
-		header("Location: ../../".$_SESSION['RETURN']);
+		if (mysqli_query($conn, $sql))
+			header("Location: ../../".$_SESSION['RETURN']);
+		else
+			echo "ERRO: Não foi possível executar.".mysqli_error($conn);
 	}
 	else
 		echo "Erro de conexão";

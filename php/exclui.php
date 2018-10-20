@@ -7,9 +7,10 @@
 		date_default_timezone_set("Etc/GMT+3");
 		$ID = $_POST['ID'];
 		$sql = "DELETE FROM ".$_SESSION['TABLENAME']." WHERE ID = '$ID'";
-		$conn->query($sql);
-		mysqli_close($conn);
-		header("Location: ../../".$_SESSION['RETURN']);
+		if (mysqli_query($conn, $sql))
+			header("Location: ../".$_SESSION['RETURN']);
+		else
+			echo "ERRO: Não foi possível executar.".mysqli_error($conn);
 	}
 	else
 		echo "Erro de conexão";
