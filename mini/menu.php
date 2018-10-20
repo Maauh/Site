@@ -1,8 +1,7 @@
 <?php 
 function isActive($file)
 {
-    $current_file_name = basename($_SERVER['REQUEST_URI']);
-    return $current_file_name == $file ? "active" : "";
+    return basename($_SERVER['REQUEST_URI']) == $file ? "active" : "";
 }
 $pages =
 [

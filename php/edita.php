@@ -11,13 +11,10 @@
 		$DESCR = $_POST['DESCR'];
 		$ID = $_POST['ID'];
 		$sql = "UPDATE ".$_SESSION['TABLENAME']." SET TITULO = '$TITULO', IMGURL = '$IMGURL', DESCR = '$DESCR' WHERE ID = '$ID'";
-		if(mysqli_query($conn, $sql)){
-			echo "Records changed successfully.";
-		} else{
+		if(mysqli_query($conn, $sql))
+			header("Location: ../".$_SESSION['RETURN']);
+		else
 			echo "ERROR: Could not able to execute.".mysqli_error($conn);
-		}
-		mysqli_close($conn);
-		header("Location: ../".$_SESSION['RETURN']);
 	}
 	else
 		echo "Erro de conexão";
