@@ -21,9 +21,9 @@
                     include_once "php/data_base.php";
                     if ($conn)
                     {
-                        $sql = "SELECT ID, TITULO, IMGURL, DESCR, DAT FROM `$TABLENAME` ORDER BY `DAT` DESC";
+                        $sql = "SELECT ID, TITULO, IMGURL, DESCR, DAT, POSTTYPE FROM `$TABLENAME` ORDER BY `DAT` DESC";
                         $result = mysqli_query($conn, $sql);
-                        while(list($ID, $TITULO, $IMGURL, $DESCR, $DAT) = mysqli_fetch_row($result))
+                        while(list($ID, $TITULO, $IMGURL, $DESCR, $DAT, $POSTTYPE) = mysqli_fetch_row($result))
                             include "mini/blog_card.php";
                     }
                     else

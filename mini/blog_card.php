@@ -66,6 +66,7 @@
                 </div>
                 <form class="form-signin" method="POST" action="php/exclui.php">
                     <input type="text" name="ID" hidden value=<?php echo "\"$ID\""?> required>
+                    <input type="text" name="TABLENAME" hidden value=<?php echo "\"$TABLENAME\""?> required>
                     <button class="btn btn-danger float-left" type="submit">Sim</button>
                     <button class="btn btn-primary float-right" data-dismiss="modal">Não</button>
                 </form>
