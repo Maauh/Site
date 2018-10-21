@@ -21,8 +21,8 @@
         <div class="container">
             <div class="row">
                 <?php
-                    $link = mysqli_connect('localhost','root', '', 'dados') or die ("A conexão não foi executada com sucesso");
-                    // $link = mysqli_connect('localhost','id7472579_admin', 'password', 'id7472579_dados') or die ("A conexão não foi executada com sucesso");
+                    $link = mysqli_connect('localhost','root', '', 'dados');
+                    // $link = mysqli_connect('localhost','id7472579_admin', 'password', 'id7472579_dados');
                     $link->set_charset("utf-8");
                     $sql = "SELECT * FROM usuarios WHERE INTEGRANTE = '1'";
                     $result = mysqli_query($link, $sql);
