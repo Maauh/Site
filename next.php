@@ -24,8 +24,7 @@
                     $_SESSION['RETURN'] = "next.php";
                     if (isset($_SESSION['user']))
                         echo '<a class="btn btn-primary btn-lg btn-block" href="#" data-toggle="modal" data-target="#caixa1">Adicionar Notícia</a>';
-                    $conn = mysqli_connect('localhost','root', '', 'dados');
-                    // $conn = mysqli_connect('localhost','id7472579_admin', 'password', 'id7472579_dados');
+                    include_once "php/data_base.php";
                     if ($conn)
                     {
                         $conn->set_charset("utf-8");

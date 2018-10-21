@@ -21,14 +21,17 @@
         <div class="container">
             <div class="row">
                 <?php
-                    $link = mysqli_connect('localhost','root', '', 'dados');
-                    // $link = mysqli_connect('localhost','id7472579_admin', 'password', 'id7472579_dados');
-                    $link->set_charset("utf-8");
-                    $sql = "SELECT * FROM usuarios WHERE INTEGRANTE = '1'";
-                    $result = mysqli_query($link, $sql);
-                    while(list($ID, $NOME, $USUARIO, $SENHA, $INTEGRANTE, $FBID, $DESCRICAO, $FUNCAO) = mysqli_fetch_row($result)) {
-                        include "mini/sobre_card.php";
+                    include_once "php/data_base.php";
+                    if ($conn)
+                    {
+                        $conn->set_charset("utf-8");
+                        $sql = "SELECT * FROM usuarios WHERE INTEGRANTE = '1'";
+                        $result = mysqli_query($link, $sql);
+                        while(list($ID, $NOME, $USUARIO, $SENHA, $INTEGRANTE, $FBID, $DESCRICAO, $FUNCAO) = mysqli_fetch_row($result))
+                            include "mini/sobre_card.php";
                     }
+                    else
+                        echo "Erro de conexão";
                 ?>	
             </div>
         </div>        

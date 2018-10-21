@@ -1,7 +1,6 @@
 <?php
 	session_start();	
-	$conn = mysqli_connect('localhost','root', '', 'dados');
-	// $conn = mysqli_connect('localhost','id7472579_admin', 'password', 'id7472579_dados');
+	include_once "data_base.php";
 	if ($conn)
 	{
 		date_default_timezone_set("Etc/GMT+3");

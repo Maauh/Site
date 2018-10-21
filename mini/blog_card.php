@@ -13,7 +13,7 @@
                     }break;
                 }
             ?>
-        <div <?php if ($POSTTYPE !== "texto") echo "class=\"col-12 col-sm-12 col-md-6\""?>>
+        <div <?php if ($POSTTYPE == "texto") echo "class=\"col-12 col-sm-12 col-md-12\""; else echo "class=\"col-12 col-sm-12 col-md-6\"";?>>
             <p class="h1 text-light bg-primary" href="#"><?php echo $TITULO;?></p><br>
             <p><?php echo $DESCR;?></p>
         </div>
