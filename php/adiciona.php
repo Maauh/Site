@@ -5,11 +5,13 @@
 	if ($conn)
 	{
 		date_default_timezone_set("Etc/GMT+3");
-		$date = date('d/m/Y h:i a', time());
 		$TITULO = $_POST['TITULO'];
 		$IMGURL = $_POST['IMGURL'];
 		$DESCR = $_POST['DESCR'];
-		$sql = "INSERT INTO ".$_SESSION['TABLENAME']." (`TITULO`, `IMGURL`, `DESCR`, `DAT`) VALUES ('$TITULO', '$IMGURL', '$DESCR', '$date')";
+		$DAT = date('Y-m-d H:i:s', time());
+		$POSTTYPE = $_POST['POSTTYPE'];
+		$TABLENAME = $_SESSION['TABLENAME'];
+		$sql = "INSERT INTO `$TABLENAME` (`TITULO`, `IMGURL`, `DESCR`, `DAT`, `POSTTYPE`) VALUES ('$TITULO', '$IMGURL', '$DESCR', '$DAT', '$POSTTYPE')";
 		if (mysqli_query($conn, $sql))
 			header("Location: ../../".$_SESSION['RETURN']);
 		else

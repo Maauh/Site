@@ -29,7 +29,8 @@
                     if ($conn)
                     {
                         $conn->set_charset("utf-8");
-                        $sql = "SELECT ID, TITULO, IMGURL, DESCR, DAT FROM ".$_SESSION['TABLENAME'];
+                        $TABLENAME = $_SESSION['TABLENAME'];
+                        $sql = "SELECT ID, TITULO, IMGURL, DESCR, DAT FROM `$TABLENAME` ORDER BY `DAT` DESC";
                         $result = mysqli_query($conn, $sql);
                         while(list($ID, $TITULO, $IMGURL, $DESCR, $DAT) = mysqli_fetch_row($result))
                             include "mini/blog_card.php";

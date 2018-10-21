@@ -9,6 +9,11 @@
         <div class="modal-body">
         <form class="form-signin" method="POST" action="php/adiciona.php\">
             <input type="text" name="TITULO" class="form-control" placeholder="Titulo" required><br>
+            <select name="POSTTYPE" class="form-control">
+                <option value="texto">Somente Texto</option>
+                <option value="img">Imagem</option>
+                <option value="iframe">Iframe</option>
+            </select><br>
             <input type="text" name="IMGURL" class="form-control" placeholder="URL" required><br>
             <textarea class="form-control" name="DESCR" rows="12" placeholder="Descrição"></textarea><br>
             <div class="page-footer font-small cyan darken-3">
