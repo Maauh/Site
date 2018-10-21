@@ -1,30 +1,29 @@
 <div class="sobre-card">
-    <h1>Bem Vindo Administrador <?php echo $_SESSION['user']['NOME'];?></h1><br>
+    <h1>Bem Vindo Administrador</h1><br>
     <h3>O site já pode ser modificado agora.</h3><br>
-    <div class="row perfil-moldura p-2 pb-4">
-        <div class="col-12 col-sm-12 col-md-4 img-container">
-            <?php
-                $NOME = $_SESSION['user']['NOME'];
-                $FBID = $_SESSION['user']['FBID'];
-                $INTEGRANTE = $_SESSION['user']['INTEGRANTE'];
-                $DESCRICAO = $_SESSION['user']['DESCRICAO'];
-                $FUNCAO = $_SESSION['user']['FUNCAO'];
-                echo "<a href=\"https://facebook.com/profile.php?id=$FBID\"><img alt=\"#\" src=\"https://graph.facebook.com/$FBID/picture?type=large\" class=\"img-thumbnail foto-perfil\"/></a>";
-            ?>
-        </div>
-        <div class="col-12 col-sm-12 col-md-8">
-            <form class="form-signin" method="POST" action="php/edita_perfil.php">
-                <input type="text" name="ID" hidden value=<?php echo $_SESSION['user']['ID'];?> required><br>
-                <input type="checkbox" name="INTEGRANTE" id="cbIntegrante" <?php if ($INTEGRANTE) echo "checked";?>>Você é um integrante do grupo?<br><br>
-                <input type="text" name="NOME" id="NOME" class="form-control" placeholder="Nome" value=<?php echo "\"".$_SESSION['user']['NOME']."\"";?> required><br>
-                <input type="text" name="FBID" class="form-control" placeholder="Facebook Id" value=<?php echo "\"".$_SESSION['user']['FBID']."\"";?>><br>
-                <textarea name="DESCRICAO" class="form-control" rows="5" placeholder="Descrição"><?php echo $_SESSION['user']['DESCRICAO'];?></textarea><br>
-                <textarea name="FUNCAO" class="form-control" rows="5" placeholder="Função"><?php echo $_SESSION['user']['FUNCAO'];?></textarea><br>
-                <div class="page-footer font-small cyan darken-3">
-                    <button class="btn btn-primary float-right" type="submit">Editar</button>
-                </div>
-            </form>
+    <?php
+        $ID = $_SESSION['user']['ID'];
+        $FBID = $_SESSION['user']['FBID'];
+        $NOME = $_SESSION['user']['NOME'];
+        $DESCRICAO = $_SESSION['user']['DESCRICAO'];
+        $FUNCAO = $_SESSION['user']['FUNCAO'];
+        include "sobre_card.php"
+    ?>
+    <a class="btn btn-primary btn-lg btn-block" href="" data-toggle="modal" data-target="#edit">Editar</a>
+    <a class="btn btn-danger btn-lg btn-block" href="php/sair.php">Sair</a>
+</div>
+<div class="modal fade" id="edit" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Perfil</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <?php include "mini/perfil_edit_form.php";?>
+            </div>
         </div>
     </div>
-    <a class="btn btn-danger btn-lg btn-block" href="php/sair.php">Sair</a>
 </div>

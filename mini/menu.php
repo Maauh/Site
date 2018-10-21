@@ -7,7 +7,7 @@ $pages =
 [
     "next.php" => "Next",
     "historia.php" => "Historia do Robô",
-    "sobre.php" => "Integrantes",
+    "integrantes.php" => "Integrantes",
     "diversao.php" => "Diversão",
     "administracao.php" => "Administração",
 ];

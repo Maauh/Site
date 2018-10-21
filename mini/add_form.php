@@ -14,7 +14,7 @@
                 <option value="img">Imagem</option>
                 <option value="iframe">Iframe</option>
             </select><br>
-            <input type="text" name="IMGURL" class="form-control" placeholder="URL" required><br>
+            <input type="text" name="IMGURL" class="form-control" placeholder="URL"><br>
             <textarea class="form-control" name="DESCR" rows="12" placeholder="Descrição"></textarea><br>
             <div class="page-footer font-small cyan darken-3">
                 <button class="btn btn-danger float-right" type="submit">Adicionar</button>

@@ -1,20 +1,8 @@
-<div class="container blog-card">
+<div class="container blog-card  border border-dark rounded">
     <div class="row">
-            <?php
-                switch ($POSTTYPE)
-                {
-                    case 'iframe':
-                    {
-                        echo "<div class=\"col-12 col-sm-12 col-md-6 embed-responsive embed-responsive-16by9\"><iframe src=\"$IMGURL\" class=\"embed-responsive-item\" ></iframe></div>";
-                    }break;
-                    case 'img':
-                    {
-                        echo "<div class=\"col-12 col-sm-12 col-md-6 img-container\"><img alt=\"#\" src=\"$IMGURL\" class=\"img-thumbnail rounded border border-dark p-0\"/></div>";
-                    }break;
-                }
-            ?>
-        <div <?php if ($POSTTYPE == "texto") echo "class=\"col-12 col-sm-12 col-md-12\""; else echo "class=\"col-12 col-sm-12 col-md-6\"";?>>
-            <p class="h1 text-light bg-primary" href="#"><?php echo $TITULO;?></p><br>
+            <?php EchoPostType($POSTTYPE, $IMGURL);?>
+        <div <?php if ($POSTTYPE == "texto") echo "class=\"col-12\""; else echo "class=\"col-12 col-sm-12 col-md-6\"";?>>
+            <p class="h1 text-light bg-primary border border-dark rounded" href="#"><?php echo $TITULO;?></p><br>
             <p><?php echo $DESCR;?></p>
         </div>
         <div class="container p-0">
@@ -53,7 +41,7 @@
                         <option value="img" <?php if ("img" == $POSTTYPE) echo "selected";?>>Imagem</option>
                         <option value="iframe" <?php if ("iframe" == $POSTTYPE) echo "selected";?>>Iframe</option>
                     </select><br>
-                    <input type="text" name="IMGURL" class="form-control" placeholder="IMGURL" value=<?php echo "\"$IMGURL\""?> required><br>
+                    <input type="text" name="IMGURL" class="form-control" placeholder="IMGURL" value=<?php echo "\"$IMGURL\""?>><br>
                     <textarea name="DESCR" class="form-control" rows="12" placeholder="Descrição"><?php echo $DESCR?></textarea><br>
                     <div class="page-footer font-small cyan darken-3">
                         <button class="btn btn-primary float-right" type="submit">Editar</button>
@@ -71,7 +59,7 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <img alt="#" src=<?php echo "\"$IMGURL\"";?> class="img-thumbnail"/>
+                    <?php EchoPostType($POSTTYPE, $IMGURL);?>
                     <p class="h1 text-light bg-primary blog-text" href="#"><?php echo $TITULO;?></p><br>
                 </div>
                 <form class="form-signin" method="POST" action="php/exclui.php">
