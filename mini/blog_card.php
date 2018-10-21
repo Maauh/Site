@@ -1,7 +1,7 @@
 <div class="container blog-card">
     <div class="row">
         <div class="col-12 col-sm-12 col-md-6 img-container">
-            <img alt="#" src=<?php echo $IMGURL;?> class="img-thumbnail"/>
+            <img alt="#" src=<?php echo $IMGURL;?> class="img-thumbnail rounded border border-dark p-0"/>
         </div>
         <div class="col-12 col-sm-12 col-md-6">
             <p class="h1 text-light bg-primary" href="#"><?php echo $TITULO;?></p><br>
