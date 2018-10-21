@@ -67,6 +67,7 @@
                 <form class="form-signin" method="POST" action="php/exclui.php">
                     <input type="text" name="ID" hidden value=<?php echo "\"$ID\""?> required>
                     <input type="text" name="TABLENAME" hidden value=<?php echo "\"$TABLENAME\""?> required>
+                    <input type="text" name="RETURN" hidden value=<?php echo "\"$RETURN\""?> required>
                     <button class="btn btn-danger float-left" type="submit">Sim</button>
                     <button class="btn btn-primary float-right" data-dismiss="modal">Não</button>
                 </form>

@@ -41,9 +41,7 @@
     <?php include "mini/footer.php";?>
   </div>
   <div class="modal fade" id="caixa1" tabindex="-1" role="dialog">
-      <?php
-          include "mini/add_form.php";
-      ?>
+      <?php include "mini/add_form.php";?>
   </div>
 </body>
 

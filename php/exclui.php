@@ -7,7 +7,7 @@
 		$ID = $_POST['ID'];
 		$sql = "DELETE FROM ".$_POST['TABLENAME']." WHERE ID = '$ID'";
 		if (mysqli_query($conn, $sql))
-			header("Location: ../".$_SESSION['RETURN']);
+			header("Location: ../".$_POST['RETURN']);
 		else
 			echo "ERRO: Não foi possível executar.".mysqli_error($conn);
 	}
