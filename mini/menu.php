@@ -5,7 +5,7 @@ function isActive($file)
 }
 $pages =
 [
-    "robocup.php" => "RobôCup",
+    "next.php" => "Next",
     "historia.php" => "Historia do Robô",
     "sobre.php" => "Integrantes",
     "diversao.php" => "Diversão",

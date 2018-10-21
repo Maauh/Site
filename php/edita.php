@@ -10,7 +10,8 @@
 		$IMGURL = $_POST['IMGURL'];
 		$DESCR = $_POST['DESCR'];
 		$ID = $_POST['ID'];
-		$sql = "UPDATE ".$_SESSION['TABLENAME']." SET TITULO = '$TITULO', IMGURL = '$IMGURL', DESCR = '$DESCR' WHERE ID = '$ID'";
+		$TABLENAME = $_SESSION['TABLENAME'];
+		$sql = "UPDATE `$TABLENAME` SET TITULO = '$TITULO', IMGURL = '$IMGURL', DESCR = '$DESCR' WHERE ID = '$ID'";
 		if(mysqli_query($conn, $sql))
 			header("Location: ../".$_SESSION['RETURN']);
 		else

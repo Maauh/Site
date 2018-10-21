@@ -1,7 +1,7 @@
 <div class="sobre-card">
     <h1>Bem Vindo Administrador <?php echo $_SESSION['user']['NOME'];?></h1><br>
     <h3>O site já pode ser modificado agora.</h3><br>
-    <div class="row perfil-moldura">
+    <div class="row perfil-moldura p-2 pb-4">
         <div class="col-12 col-sm-12 col-md-4 img-container">
             <?php
                 $NOME = $_SESSION['user']['NOME'];

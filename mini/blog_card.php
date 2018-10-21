@@ -7,7 +7,7 @@
             <p class="h1 text-light bg-primary" href="#"><?php echo $TITULO;?></p><br>
             <p><?php echo $DESCR;?></p>
         </div>
-        <div style="padding: 0;" class="container">
+        <div class="container p-0">
                 <?php
                 if ($DAT)
                     echo "<p>Postado no dia $DAT</p><br>";
@@ -55,7 +55,7 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <img alt="#" src=<?php echo $IMGURL;?> class="img-thumbnail"/>
+                    <img alt="#" src=<?php echo "\"$IMGURL\"";?> class="img-thumbnail"/>
                     <p class="h1 text-light bg-primary blog-text" href="#"><?php echo $TITULO;?></p><br>
                 </div>
                 <form class="form-signin" method="POST" action="php/exclui.php">

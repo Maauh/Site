@@ -30,10 +30,9 @@
                     {
                         $conn->set_charset("utf-8");
                         $sql = "SELECT ID, TITULO, IMGURL, DESCR, DAT FROM ".$_SESSION['TABLENAME'];
-                        $result = mysqli_query($conn,$sql);
-                        while(list($ID, $TITULO, $IMGURL, $DESCR, $DAT) = mysqli_fetch_row($result)) {
+                        $result = mysqli_query($conn, $sql);
+                        while(list($ID, $TITULO, $IMGURL, $DESCR, $DAT) = mysqli_fetch_row($result))
                             include "mini/blog_card.php";
-                        }
                     }
                     else
                         echo "<p>Não foi possível fazer a conexão com o banco de dados.</p>"
