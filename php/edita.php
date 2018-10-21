@@ -10,10 +10,10 @@
 		$DESCR = $_POST['DESCR'];
 		$ID = $_POST['ID'];
 		$POSTTYPE = $_POST['POSTTYPE'];
-		$TABLENAME = $_SESSION['TABLENAME'];
+		$TABLENAME = $_POST['TABLENAME'];
 		$sql = "UPDATE `$TABLENAME` SET TITULO = '$TITULO', IMGURL = '$IMGURL', DESCR = '$DESCR', POSTTYPE = '$POSTTYPE' WHERE ID = '$ID'";
 		if(mysqli_query($conn, $sql))
-			header("Location: ../".$_SESSION['RETURN']);
+			header("Location: ../".$_POST['RETURN']);
 		else
 			echo "ERROR: Could not able to execute.".mysqli_error($conn);
 	}

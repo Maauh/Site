@@ -14,15 +14,13 @@
         <div class="container">
                 <?php
                     session_start();
-                    $_SESSION['TABLENAME'] = "next";
-                    $_SESSION['RETURN'] = "next.php";
+                    $TABLENAME = "next";
+                    $RETURN = "next.php";
                     if (isset($_SESSION['user']))
                         echo '<a class="btn btn-primary btn-lg btn-block" href="#" data-toggle="modal" data-target="#caixa1">Adicionar Notícia</a>';
                     include_once "php/data_base.php";
                     if ($conn)
                     {
-                        $conn->set_charset("utf-8");
-                        $TABLENAME = $_SESSION['TABLENAME'];
                         $sql = "SELECT ID, TITULO, IMGURL, DESCR, DAT FROM `$TABLENAME` ORDER BY `DAT` DESC";
                         $result = mysqli_query($conn, $sql);
                         while(list($ID, $TITULO, $IMGURL, $DESCR, $DAT) = mysqli_fetch_row($result))

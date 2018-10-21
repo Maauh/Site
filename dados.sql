@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 21-Out-2018 às 17:47
+-- Generation Time: 21-Out-2018 às 22:30
 -- Versão do servidor: 10.1.36-MariaDB
 -- versão do PHP: 7.2.10
 
@@ -51,9 +51,9 @@ INSERT INTO `historia` (`ID`, `TITULO`, `IMGURL`, `DESCR`, `DAT`, `POSTTYPE`) VA
 (7, 'Wall-E na adolescência', 'imagem/historia/Adolescente.jpg', 'Como qualquer pessoa nessa idade, ele passou por diversas fases, uma delas sendo essa relatada na foto. Raspou a cabeça e começou a treinar duro para suas futuras batalhas. Um verdadeiro monge Shaolin.', '2018-10-19 11:50:00', 'img'),
 (8, 'Chegou o grande dia', 'imagem/historia/O_Dia.jpg', 'Todos os momentos vividos pelo grupo culminam neste. O tão aguardado grande dia da competição havia chegado... A ansiedade dos membros do grupo nesse dia é inesquecível, assim como o próprio dia como um todo.', '2018-10-19 11:59:00', 'img'),
 (9, 'Calma, garoto', 'imagem/historia/Teste.jpg', 'É só um teste, não tem necessidade de agressão...', '2018-10-19 12:00:00', 'img'),
-(10, 'Nas mãos do pai', 'imagem/historia/Pai.jpg', 'Wall-E visto nas mãos de seu pai, mais conhecido como \"drift king\". Se você estava lá, sabe a razão de tal nomenclatura. Se não estava, acredite: foi de tirar o fôlego, o coração quase sai pela garganta.', '2018/10/19 12:03:00', 'img'),
+(10, 'Nas mãos do pai', 'imagem/historia/Pai.jpg', 'Wall-E visto nas mãos de seu pai, mais conhecido como \"drift king\". Se você estava lá, sabe a razão de tal nomenclatura. Se não estava, acredite: foi de tirar o fôlego, o coração quase sai pela garganta.', '2018-10-19 12:03:00', 'img'),
 (11, '\"A paciência é a maior virtude\"', 'imagem/historia/Paciente.jpg', 'Já diziam os sábios. A maior das virtudes aprendidas por Wall-E na sua jornada para se tornar um monge Shaolin foi a paciência. É... Esse era mesmo um dia em que tudo seria testado até o limite, até mesmo isso.', '2018-10-19 12:06:00', 'img'),
-(12, 'Galvão Bueno perderia a voz', 'imagem/historia/RoboCup.jpg', 'Você acha que as partidas de UFC são interessantes? Lutas de espada da era medieval? Ou talvez uma guerra mundial seja emocionante pra você? Se você respondeu sim para alguma das três perguntas, você claramente não conhece a RoboCup.', '2018-10-19 12:29:00', 'img');
+(12, 'Galvão Bueno perderia a voz', 'https://www.youtube.com/embed/z09wQ2_jDLA', 'Você acha que as partidas de <del>briga de galo</del> UFC são interessantes? Lutas de espada da era medieval? Ou talvez uma guerra mundial seja emocionante pra você? Se você respondeu sim para alguma das três perguntas, você claramente não conhece a RoboCup <del>ou conhece não sei</del>.', '2018-10-19 12:29:00', 'iframe');
 
 -- --------------------------------------------------------
 
@@ -96,7 +96,7 @@ INSERT INTO `usuarios` (`ID`, `NOME`, `USUARIO`, `SENHA`, `INTEGRANTE`, `FBID`, 
 (2, 'Admistrador', 'admin', 'password', 0, NULL, NULL, NULL),
 (3, 'Pedro Estevam Oliveira Fonseca', 'papitoti', '123', 1, '100002115606423', 'O integrante mais carismático do grupo. Apaixonado por tecnologias inovadoras de tenis, tem como hobby estudar calçados para os mais variados tipos de esporte.', 'É responsável pela construção da carcaça do robô e auxilia no desenvolvimento do site.'),
 (4, 'Gabriel Oliveira Magalhães', 'cthulhu', '123', 1, '100001786181196', 'Otimista e Bem Humorado, procura sempre estar zen, ama fortemente a primeira e a décima arte, sonha em poder trabalhar na indústria de desenvolvimento de Games.', 'É o Designer do jogo, criador das sprites e mapas utilizados e também é o nosso game-tester.'),
-(5, 'Mauricio Sideira Peres Junior', 'maauh', '123', 1, '1437967511', 'Para ele a velocidade dos motores é tudo, também conhecido como Drift King, é o piloto do nosso robô WALL-E e que nos levará a vitória do robocup.', 'Responsável pelo desenvolvimento do site e do banco de dados.'),
+(5, 'Mauricio Sideira Peres Junior', 'maauh', '123', 1, '1437967511', 'Para ele a velocidade dos motores é tudo, também conhecido como Drift King, é o piloto do nosso robô WALL-E e que nos levará a <del>derrota</del> vitória no robocup.', 'Responsável pelo desenvolvimento do site e do banco de dados.'),
 (6, 'Gustavo Alex de Sousa Fernandes', 'gugapower', '123', 1, '100024474408428', 'Nem playboy, nem bilionário, nem filantropo, muito menos um gênio, só um nerd entusiasta de jogos eletrônicos que adora competir e é apaixonado por cálculos e programação. Hobbies? Jogar, estudar, e desenvolver, oras! O que mais alguém com tal descrição poderia fazer da vida?', 'Tem como função a criação da história do jogo, suas instruções, jogabilidade e balanceamento.');
 
 --
@@ -129,7 +129,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `historia`
 --
 ALTER TABLE `historia`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `next`

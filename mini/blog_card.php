@@ -35,6 +35,8 @@
             <div class="modal-body">
                 <form class="form-signin" method="POST" action="php/edita.php">
                     <input type="text" name="ID" hidden value=<?php echo "\"$ID\""?> required>
+                    <input type="text" name="TABLENAME" hidden value=<?php echo "\"$TABLENAME\""?> required>
+                    <input type="text" name="RETURN" hidden value=<?php echo "\"$RETURN\""?> required>
                     <input type="text" name="TITULO" class="form-control" placeholder="Titulo" value=<?php echo "\"$TITULO\""?> required><br>
                     <select name="POSTTYPE" class="form-control">
                         <option value="texto">Somente Texto</option>

@@ -9,10 +9,10 @@
 		$DESCR = $_POST['DESCR'];
 		$DAT = date('Y-m-d H:i:s', time());
 		$POSTTYPE = $_POST['POSTTYPE'];
-		$TABLENAME = $_SESSION['TABLENAME'];
+		$TABLENAME = $_POST['TABLENAME'];
 		$sql = "INSERT INTO `$TABLENAME` (`TITULO`, `IMGURL`, `DESCR`, `DAT`, `POSTTYPE`) VALUES ('$TITULO', '$IMGURL', '$DESCR', '$DAT', '$POSTTYPE')";
 		if (mysqli_query($conn, $sql))
-			header("Location: ../../".$_SESSION['RETURN']);
+			header("Location: ../../".$_POST['RETURN']);
 		else
 			echo "ERRO: Não foi possível executar.".mysqli_error($conn);
 	}
