@@ -60,10 +60,11 @@
                 <h5 class="modal-title">Você Realmente Deseja Excluir?</h5><br>
             </div>
             <div class="modal-body">
-                <div>
+                <div class="d-flex justify-content-center">
                     <?php EchoPostType($POSTTYPE, $IMGURL);?>
-                    <p class="h1 text-light bg-primary blog-text" href="#"><?php echo $TITULO;?></p><br>
                 </div>
+                <br>
+                <p class="h1 text-light bg-primary blog-text" href="#"><?php echo $TITULO;?></p><br>
                 <form class="form-signin" method="POST" action="php/exclui.php">
                     <input type="text" name="ID" hidden value=<?php echo "\"$ID\""?> required>
                     <input type="text" name="TABLENAME" hidden value=<?php echo "\"$TABLENAME\""?> required>

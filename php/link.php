@@ -11,7 +11,7 @@ function EchoPostType($POSTTYPE, $URL)
     {
         case 'iframe':
         {
-            echo "<div class=\"col-12 col-sm-12 col-md-6 embed-responsive embed-responsive-16by9\"><iframe src=\"$URL\" class=\"embed-responsive-item\" ></iframe></div>";
+            echo "<div class=\"col-12 col-sm-12 col-md-6 embed-responsive embed-responsive-4by3\"><iframe src=\"$URL\" class=\"embed-responsive-item\" ></iframe></div>";
         }break;
         case 'img':
         {

@@ -15,8 +15,8 @@
       <h1 class="display-3 ">POTATOES PARTY</h1>
     </div>
     <div class="row">
-      <div class="col-12 col-sm-12 col-md-6 img-container">
-        <img alt="#" src="imagem/nos.jpg" class="img-thumbnail" />
+      <div class="col-12 img-container">
+        <img alt="#" src="imagem/Potatoes-Party.png" class="img-thumbnail" />
       </div>
     </div><br>
     <div class="container">
