@@ -21,21 +21,21 @@
     </div><br>
     <div class="container">
       <?php
-          session_start();
-          $TABLENAME = "index";
-          $RETURN = "index.php";
-          if (isset($_SESSION['user']))
-              echo '<a class="btn btn-primary btn-lg btn-block" href="#" data-toggle="modal" data-target="#caixa1">Adicionar Notícia</a>';
-          include_once "php/data_base.php";
-          if ($conn)
-          {
-              $sql = "SELECT ID, TITULO, IMGURL, DESCR, DAT, POSTTYPE FROM `$TABLENAME` ORDER BY `DAT` DESC";
-              $result = mysqli_query($conn, $sql);
-              while(list($ID, $TITULO, $IMGURL, $DESCR, $DAT, $POSTTYPE) = mysqli_fetch_row($result))
-                  include "mini/blog_card.php";
-          }
-          else
-              echo "<p>Não foi possível fazer a conexão com o banco de dados.</p>"
+        session_start();
+        $TABLENAME = "index";
+        $RETURN = "index.php";
+        if (isset($_SESSION['user']))
+          echo '<a class="btn btn-primary btn-lg btn-block" href="#" data-toggle="modal" data-target="#caixa1">Adicionar Notícia</a>';
+        include_once "php/data_base.php";
+        if ($conn)
+        {
+          $sql = "SELECT ID, TITULO, IMGURL, DESCR, DAT, POSTTYPE FROM `$TABLENAME` ORDER BY `DAT` DESC";
+          $result = mysqli_query($conn, $sql);
+          while(list($ID, $TITULO, $IMGURL, $DESCR, $DAT, $POSTTYPE) = mysqli_fetch_row($result))
+            include "mini/blog_card.php";
+        }
+        else
+          echo "<p>Não foi possível fazer a conexão com o banco de dados.</p>"
       ?>
     </div>
     <?php include "mini/footer.php";?>

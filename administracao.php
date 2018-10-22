@@ -11,13 +11,13 @@
 	<?php include "mini/menu.php";?>
 	<div class="container1">
 		<?php
-          session_start();
-          if (isset($_SESSION['user']))
-            include_once "mini/perfil.php";
-          else
-            include_once "mini/login.php";
-        ?>
-		<?php include "mini/footer.php";?>
+			session_start();
+			if (isset($_SESSION['user']))
+				include_once "mini/perfil.php";
+			else
+				include_once "mini/login.php";
+				include "mini/footer.php";
+		?>
 	</div>
 </body>
 

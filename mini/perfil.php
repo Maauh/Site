@@ -9,6 +9,7 @@
         $FUNCAO = $_SESSION['user']['FUNCAO'];
         include "sobre_card.php"
     ?>
+    <br>
     <a class="btn btn-primary btn-lg btn-block" href="" data-toggle="modal" data-target="#edit">Editar</a>
     <a class="btn btn-danger btn-lg btn-block" href="php/sair.php">Sair</a>
 </div>
