@@ -11,9 +11,7 @@
 <body class="background">
   <?php include "mini/menu.php";?>
   <div class="container1">
-    <div>
-      <h1 class="display-3 ">POTATOES PARTY</h1>
-    </div>
+    <h1 class="display-3 text-break">POTATOES PARTY</h1>
     <div class="row">
       <div class="col-12 img-container">
         <img alt="#" src="imagem/Potatoes-Party.png" class="img-thumbnail" />
