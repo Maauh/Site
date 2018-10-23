@@ -221,7 +221,8 @@ let Time =
 }
 let Player =
 {
-    level: 0,
+    canvas_interacted: false,
+    mute_sound: false,
     gold: 5000,
     score: 0,
 }
@@ -371,11 +372,15 @@ let sprites =
     toxic_rocket: new Sprite("imagem/projectiles/toxic_rocket.png"),
     bullet: new Sprite("imagem/projectiles/bullet.png"),
     laser_beam: new Sprite("imagem/projectiles/laser.png"),
+    flame_thrower: Sprite.CreateSheet("imagem/turrets/flamethrower_", 2, ".png"),
     explosion: Sprite.CreateSheet("imagem/effects/tile00", 5, ".png"),
     explosion_realistic: Sprite.CreateSheet("imagem/effects/realexplosion/", 27, ".png"),
     grass: new Sprite("imagem/background/grass.jpg"),
-    paths: Sprite.CreateSheet("imagem/background/Track", 4,".png"),
+    paths: Sprite.CreateSheet("imagem/background/Track", 5,".png"),
     menu_background: new Sprite("imagem/background/menu.png"),
+    game_over: new Sprite("imagem/background/game_over.png"),
+    game_finished: new Sprite("imagem/background/game_finished.png"),
+    next_level: new Sprite("imagem/background/next_level.png"),
     tutorial: Sprite.CreateSheet("imagem/tutorial/tut", 3, ".png"),
 }
 class Entity extends Transformable
@@ -507,7 +512,7 @@ class KillableEntity extends Entity
         this.max_life = max_life;
         this._life = max_life;
     }
-    get info() { return ["Vida Atual: " + this.life, "Vida Máxima" + this.max_life]; }
+    get info() { return ["Vida Atual: " + Math.round(this.life), "Vida Máxima" + this.max_life]; }
     get is_alive() { return this.life > 0; }
     get is_dead() { return !this.is_alive; }
     get life() { return this._life; }
@@ -680,7 +685,23 @@ class EnemyFactory
         e.path = path;
         e.name = this.name;
         e.rank = rank;
-        e.gold = 3 * (rank + 1);
+        switch(rank){
+            case 0 :
+            e.gold = 3;
+            break;
+            case 1 :
+            e.gold = 5;
+            break;
+            case 2 :
+            e.gold = 9;
+            break;
+            case 3 :
+            e.gold = 13;
+            case 4 :
+            e.gold = 15;
+            break;
+        }
+
         AddProperty(e, "info", function() {
             return [this.name + "-" + (rank != 4 ? rank != 3 ? rank != 2 ? rank != 1 ? "D" : "C" : "B" : "A" : "S"),
             "Vida: " + this.life + " de " + this.max_life,
@@ -717,8 +738,8 @@ class EnemyFactory
     }
 }
 let spider_factory = new EnemyFactory("Mecha-Aranha", animations.spider, .4, 100, 100, "Terrestre");
-let beetle_factory = new EnemyFactory("Mecha-Besouro", animations.beetle, .3, 80, 150, "Terrestre");
-let wasp_factory = new EnemyFactory("Mecha-Vespa", animations.wasp, .3, 100, 125, "Aéreo");
+let beetle_factory = new EnemyFactory("Mecha-Besouro", animations.beetle, .3, 80, 220, "Terrestre");
+let wasp_factory = new EnemyFactory("Mecha-Vespa", animations.wasp, .3, 140, 180, "Aéreo");
 class Projectile extends Entity
 {
     constructor(aoe, speed, main_target, transform = new Transform())
@@ -853,9 +874,45 @@ class ToxicCloud extends Entity
             let grd = context.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, c.radius);
             grd.addColorStop(0,"#7df442");
             grd.addColorStop(1,"transparent");
-            let style = grd;
-            RenderCircleFilled(pos, c.radius, style);
+            RenderCircleFilled(pos, c.radius, grd);
         });
+        context.globalAlpha = 1;
+    }
+}
+class LightParticle extends Entity
+{
+    constructor(velocity, duration, radius, alpha, colors, transform = new Transform)
+    {
+        super(transform);
+        this.velocity = velocity;
+        this.radius = radius;
+        this.colors = colors;
+        this.alpha = alpha;
+        this.timer = new Timer(duration, () => { this.Release(); });
+        this.traveled_distance = 0;
+        this.render_layer = 3;
+    }
+    get percent() { return this.timer.to_tick / this.timer.delay; }
+    get radius_mult() { return this.timer.elapsed / this.timer.delay; }
+    Update()
+    {
+        this.timer.Update();
+        this.transform.position = this.transform.position.add(this.velocity.mult(Time.deltaTime));
+        this.traveled_distance += Time.deltaTime;
+    }
+    Render()
+    {
+        let pos = this.transform.position;
+        let radius = this.radius * this.radius_mult;
+        context.globalAlpha = this.alpha * this.percent;
+        let grd = context.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, radius);
+        let s = 1 / (this.colors.length + 1);
+        for (let i = 0; i < this.colors.length; i++) {
+            const color = this.colors[i];
+            grd.addColorStop(i * s, color);
+        }
+        grd.addColorStop(1, "transparent");
+        RenderCircleFilled(pos, radius, grd);
         context.globalAlpha = 1;
     }
 }
@@ -974,15 +1031,19 @@ class Turret extends Entity
     }
     static RenderRange(transform, range, fov = 0, color = "#999")
     {
-        let d = fov / 2;
-        let a1 = transform.rotation - d;
-        let a2 = transform.rotation + d;
-        let dir1 = Vector2.angleVector(a1).mult(range).add(transform.position);
-        let dir2 = Vector2.angleVector(a2).mult(range).add(transform.position);
+        
         context.save();
         context.globalAlpha = .4;
         RenderCircle(transform.position, range, color);
-        RenderLines("#000", 1, dir1, transform.position, dir2);
+        if (fov !== 0 && fov !== 2 * Math.PI)
+        {
+            let d = fov / 2;
+            let a1 = transform.rotation - d;
+            let a2 = transform.rotation + d;
+            let dir1 = Vector2.angleVector(a1).mult(range).add(transform.position);
+            let dir2 = Vector2.angleVector(a2).mult(range).add(transform.position);
+            RenderLines("#000", 1, dir1, transform.position, dir2);
+        }
         context.restore();
     }
 }
@@ -1069,11 +1130,11 @@ class MachineGun extends Turret
         this.bullet_sprite = sprites.bullet;
         this.left = false;
         this.transform.scale = .5;
-        this.upgrades.Dano = new Upgrade(30, 5);
+        this.upgrades.Dano = new Upgrade(34, 5);
         this.bullet_aoe = 0;
         this.bullet_speed = 700;
         this.name = "Metralhadora";
-        this.cost = 80;
+        this.cost = 100;
         this.evolutions = [new LaserGun, new MiniGun];
         this.remove_filter = e => { return 2 < e.rank; };
     }
@@ -1249,6 +1310,54 @@ class Sniper extends CannonTurret
         this.manager.AddEntity(new BulletTrail(this.aoe, .8, this.bullet_origin, end));
     }
 }
+class FlameThrower extends Turret
+{
+    constructor(transform = new Transform())
+    {
+        super(15, 150, transform);
+        this.transform.scale = .5;
+        this.name = "Lança Chamas";
+        this.cost = 120;
+        this.upgrades.Dano = new Upgrade(320, 5);
+        this.fov = .9;
+        this.timer.delay = 0;
+        this.remove_filter = e => { return e.type == "Terrestre"; };
+        this.particle_timer = new Timer(.1, () => {
+            if (!this.targets.length)
+                return;
+            for (let i = 0; i < 50; i++)
+            {
+                let p = new LightParticle(Vector2.angleVector(this.transform.rotation + this.fov * .6 * (Math.random() - .5)).mult(this.flame_speed), this.flame_duration, 50, 1, ["red", "orange", "yellow"], new Transform(this.bullet_position));
+                this.manager.AddEntity(p);
+            }
+        });
+    }
+    get copy() { return new FlameThrower(this.transform); }
+    get damage() { return this.upgrades.Dano.value; }
+    get info() { return [this.name, "Alcance: " + Math.round(this.range), "Alvos: Aéreos", "Dano por Segundo: " + Math.round(this.damage)]; }
+    get bullet_position() { return Vector2.add(this.transform.position, Vector2.angleVector(this.transform.rotation).mult(50 * this.transform.scale)); }
+    get flame_speed() { return 350; }
+    get flame_duration() { return this.range * .9 / this.flame_speed; }
+    Shoot()
+    {
+        
+        this.targets.forEach(e => {
+            e.life -= (this.damage + .15 * e.max_life) * Time.deltaTime;
+        });
+    }
+    Update()
+    {
+        super.Update();
+        this.particle_timer.Update();
+    }
+    Render()
+    {
+        super.Render();
+        let sprite = this.targets.length ? sprites.flame_thrower[1] : sprites.flame_thrower[0];
+        sprite.transform = this.transform;
+        sprite.Render();
+    }
+}
 class AntiAir extends CannonTurret
 {
     constructor(transform = new Transform())
@@ -1260,7 +1369,7 @@ class AntiAir extends CannonTurret
         this.transform.scale = .5;
         this.aoe = 70;
         this.remove_filter = e => { return e.type == "Terrestre"; };
-        this.evolutions = [new Sniper]
+        this.evolutions = [new Sniper, new FlameThrower]
     }
     get copy() { return new AntiAir(this.transform); }
     get damage() { return this.upgrades.Dano.value; }
@@ -1270,11 +1379,43 @@ class AntiAir extends CannonTurret
         this.manager.AddEntity(new Rocket(sprites.rocket, animations.explosion_realistic, this.damage, this.aoe, 350, this.target, this.transform));
     }
 }
+class GodTower extends Turret
+{
+    constructor(transform = new Transform())
+    {
+        super(666, 99999, transform);
+        this.upgrades.Alcance.max_level = 1;
+        this.name = "God-Tower";
+        this.cost = 0;
+        this.fov = 2 * Math.PI;
+        this.turn_speed = 99999;
+    }
+    get copy() { return new GodTower(this.transform); }
+    get info() { return super.info.concat("Alvos: ????", "Dano: InstaKill"); }
+    Shoot()
+    {
+        this.targets.forEach(e => {
+            e.life = 0;
+        });
+    }
+    RenderState(b)
+    {
+        if (b)
+            RenderCircle(this.transform.position, 10 * this.transform.scale, "green", "black", 2);
+        else
+            RenderCircle(this.transform.position, 10 * this.transform.scale, "red", "black", 2);
+    }
+    Render()
+    {
+        RenderCircle(this.transform.position, 10 * this.transform.scale, "blue", "black", 2);
+    }
+}
 let turrets =
 {
     machine_gun: new MachineGun(),
     rocket_launcher: new RocketLauncher(),
     anti_air: new AntiAir(),
+    // god_tower: new GodTower(),
 };
 class GameMap extends Entity
 {
@@ -1358,27 +1499,93 @@ class GameManager extends EntityManager
     }
 }
 
+class Sound
+{
+    constructor(src)
+    {
+        this.audio = document.createElement("audio");
+        this.audio.src = src;
+        this.audio.setAttribute("preload", "auto");
+        this.audio.setAttribute("controls", "none");
+        this.audio.style.display = "none";
+        this.audio.ontimeupdate = () => {
+            this.CheckVolume();
+        };
+        this.audio.loop = true;
+    }
+    get is_playing() { return !this.audio.paused; }
+    get is_paused() { return this.audio.paused; }
+    get elapsed() { return this.audio.currentTime; }
+    set elapsed(value) { this.audio.currentTime = value; }
+    get auto_play() { return this.audio.autoplay; }
+    set auto_play(value) { this.audio.autoplay = value; }
+    get loop() { return this.audio.loop; }
+    set loop(value) { this.audio.loop = value; }
+    CheckVolume()
+    {
+        if (Player.mute_sound) this.audio.volume = 0;
+        else this.audio.volume = 1;
+    }
+    Play()
+    {
+        this.CheckVolume();
+        this.audio.play();
+    }
+    Pause() { this.audio.pause(); }
+    Stop()
+    {
+        this.Pause();
+        this.elapsed = 0;
+    }
+    Replay()
+    {
+        this.Stop();
+        this.Play();
+    }
+}
+
+let sounds =
+[
+    new Sound("sounds/Trivium - The End of Everything 8-bit Cover by BONESOLVENT.mp3"),
+    new Sound("sounds/Trivium - Ascendancy 8-bit Cover by BONESOLVENT.mp3"),
+    new Sound("sounds/Trivium - Throes Of Perdition (8-Bit).mp3"),
+    new Sound("sounds/Three Days Grace - Pain (8 bit).mp3"),
+    new Sound("sounds/Avenged Sevenfold - Buried Alive (8-bit).mp3"),
+    new Sound("sounds/Avenged Sevenfold - Not Ready To Die (8-bit).mp3"),
+];
+
+let soundtrack =
+{
+    _index: 0,
+};
+AddProperty(soundtrack, "current", function(){return sounds[this._index];});
+AddProperty(soundtrack, "index", function(){return this._index;}, function(value){this.current.Stop();this._index=Math.clamp(value,0,sounds.length-1);this.current.Play();});
+
 let paths =
 [
     new Path(sprites.paths[0], new KillableEntity(5000, trans(vec(375, 580))), vec(0, 105), vec(332, 105), vec(332, 235), vec(730, 235), vec(730, 445), vec(375, 445)),
     new Path(sprites.paths[1], new KillableEntity(5000, trans(vec(625, 540))), vec(0, 100), vec(650, 100), vec(650, 290), vec(155, 290), vec(155, 450), vec(625, 450)),
     new Path(sprites.paths[2], new KillableEntity(5000, trans(vec(580, 588))), vec(0, 65), vec(240, 65), vec(240, 175), vec(435, 175), vec(435, 65), vec(725, 65), vec(725, 328), vec(295, 328), vec(295, 478), vec(580, 478)),
     new Path(sprites.paths[3], new KillableEntity(5000, trans(vec(270, 592))), vec(0, 358), vec(136, 358), vec(136, 43), vec(360, 43), vec(360, 145), vec(542, 145), vec(542, 50), vec(720, 50), vec(720, 255), vec(318, 255), vec(318, 393), vec(583, 393), vec(583, 505), vec(270, 505)),
+    new Path(sprites.paths[4], new KillableEntity(5000, trans(vec(429, 595))), vec(146, 0), vec(146, 86), vec(267, 86), vec(267, 258), vec(103, 258), vec(103, 497), vec(270, 497), vec(270, 365), vec(390, 365), vec(390, 89), vec(672, 89), vec(672, 226), vec(551, 226), vec(551, 365), vec(673, 365), vec(673, 477),vec(429, 477)),
 ];
 
 let waves =
 [
-    [wave(20), wave(.5, spider_factory.Create[0], 20), wave(10), wave(.5, beetle_factory.Create[0], 20), wave(10), wave(.5, wasp_factory.Create[0], 20)],
-    [wave(20), wave(.5, spider_factory.Create[3], 20), wave(10), wave(.5, beetle_factory.Create[3], 20), wave(10), wave(.5, wasp_factory.Create[3], 20)],
-    [wave(20), wave(.5, spider_factory.Create[3], 20), wave(10), wave(.5, beetle_factory.Create[3], 20), wave(10), wave(.5, wasp_factory.Create[3], 20)],
+    [wave(20), wave(.5, spider_factory.Create[1], 35), wave(10), wave(.5, spider_factory.Create[2], 35), wave(20), wave(.5, beetle_factory.Create[2], 25), wave(3), wave(.5, spider_factory.Create[2], 35)],
+    [wave(20), wave(.5, wasp_factory.Create[1], 30), wave(10), wave(.5, spider_factory.Create[2], 35), wave(20), wave(.5, beetle_factory.Create[3], 15), wave(3), wave(.5, wasp_factory.Create[2], 20)],
+    [wave(20), wave(.5, spider_factory.Create[2], 35), wave(10), wave(.5, wasp_factory.Create[3], 25), wave(20), wave(.5, beetle_factory.Create[3], 25), wave(3), wave(.5, spider_factory.Create[3], 30)],
+    [wave(20), wave(.5, spider_factory.Create[3], 35), wave(8), wave(.5, beetle_factory.Create[3], 30), wave(8), wave(.5, wasp_factory.Create[3], 25), wave(20), wave(.7, spider_factory.Create[4], 20), wave(3), wave(.7, beetle_factory.Create[4], 20)],
+    [wave(20), wave(.7, wasp_factory.Create[4], 20), wave(8), wave(.7, spider_factory.Create[4], 35), wave(8), wave(.7, wasp_factory.Create[4], 20), wave(8), wave(.7, spider_factory.Create[4], 40), wave(20), wave(.7, beetle_factory.Create[4], 30), wave(3), wave(.7, spider_factory.Create[4], 15), wave(3), wave(.7, wasp_factory.Create[4], 15)],
 ];
 
 let maps =
 [
-    new GameMap(sprites.paths[1], 15000, paths[1], waves[1]),
-    new GameMap(sprites.paths[0], 5000, paths[0], waves[0]),
-    new GameMap(sprites.paths[2], 5000, paths[2], waves[2]),
-    new GameMap(sprites.paths[3], 5000, paths[3], waves[0]),
+    new GameMap(sprites.paths[0], 600, paths[0], waves[0]),
+    new GameMap(sprites.paths[1], 700, paths[1], waves[1]),
+    new GameMap(sprites.paths[2], 800, paths[2], waves[2]),
+    new GameMap(sprites.paths[3], 1000, paths[3], waves[3]),
+    new GameMap(sprites.paths[4], 2000, paths[4], waves[4]),
 ];
 
 let manager = new GameManager();
@@ -1548,6 +1755,7 @@ function RenderStartMenu()
     let pos = vec(canvas.width * .5, canvas.height * .5).sub(size.div(2));
     if (Button(pos, size, "Jogar"))
     {
+        soundtrack.index++;
         manager.map = maps[0];
         game_state = 2;
     }
@@ -1561,23 +1769,27 @@ function RenderStartMenu()
 
 function RenderGameOver()
 {
-    let size = vec(canvas.width * .15, canvas.height * .08);
-    let pos = vec(canvas.width / 2, canvas.height / 2).sub(size.div(2));
+    sprites.game_over.Render();
+    soundtrack.current.Stop();
+    let size = vec(canvas.width * .2, canvas.height * .08);
+    let pos = vec(canvas.width * .5, canvas.height * .9).sub(size.div(2));
     if (Button(pos, size, "Tentar Novamente"))
     {
         manager.Reset();
         gui.Reset();
+        soundtrack.current.Play();
         game_state = 2;
     }
 }
 
 function RenderScore()
 {
+    sprites.next_level.Render();
     let size = vec(canvas.width * .2, canvas.height * .08);
-    let pos = vec(canvas.width * .5, canvas.height * .5).sub(size.div(2));
+    let pos = vec(canvas.width * .5, canvas.height * .8).sub(size.div(2));
     Button(pos, size, "Sua Pontuação foi: " + Player.score);
     size = vec(canvas.width * .1, canvas.height * .08);
-    pos = vec(canvas.width * .5, canvas.height * .8).sub(size.div(2));
+    pos = vec(canvas.width * .5, canvas.height * .9).sub(size.div(2));
     if (Button(pos, size, "Continuar"))
     {
         if (++map_index == maps.length)
@@ -1585,6 +1797,7 @@ function RenderScore()
             game_state = 4;
             return;
         }
+        soundtrack.index++;
         manager.map = maps[map_index];
         gui.Reset();
         game_state = 2;
@@ -1597,7 +1810,14 @@ function RenderScore()
 
 function RenderCredits()
 {
-
+    sprites.game_finished.Render();
+    let size = vec(canvas.width * .1, canvas.height * .08);
+    let pos = vec(canvas.width * .6, canvas.height * .9).sub(size.div(2));
+    if (Button(pos, size, "Menu"))
+    {
+        game_state = 0;
+        soundtrack.index = 0;
+    }
 }
 
 function RenderTutorial()
@@ -1627,9 +1847,10 @@ function Start()
     sprites.paths.forEach(b => { b.top_position = vec(0, 0); });
     sprites.tutorial.forEach(b => { b.top_position = vec(0, 0); });
     sprites.menu_background.top_position = vec(0, 0);
+    sprites.next_level.top_position = vec(0, 0);
+    sprites.game_over.top_position = vec(0, 0);
+    sprites.game_finished.top_position = vec(0, 0);
     manager.map = maps[0];
-
-    manager.AddEntity(new ToxicCloud(10, trans(vec(50, 50))));
 }
 
 function Update()
@@ -1672,6 +1893,25 @@ function Render()
         RenderTutorial();
         break;
     }
+    if (!Player.canvas_interacted)
+        return;
+    let pos = vec(canvas.width * .01, canvas.height * .01);
+    let size = vec(canvas.width * .12, canvas.height * .03);
+    if (Button(pos, size, "Música: " + (Player.mute_sound ? "Desligada" : "Ligada")))
+        Player.mute_sound = !Player.mute_sound;
+    if (!Player.mute_sound)
+    {
+        pos.x += size.x * 1.05;
+        size.x = 500;
+        let str = soundtrack.current.audio.src;
+        str = str.replace(/%20/g, " ");
+        str = str.replace(".mp3","");
+        str = str.split(/(\\|\/)/g).pop();
+        if (Button(pos, size, str))
+        {
+            navigator.clipboard.writeText(str);
+        }
+    }
 }
 
 let lastRender = 0;
@@ -1691,6 +1931,11 @@ function handleClick(e)
 {
     e.preventDefault();
     Input.mouseClick = true;
+    if (!Player.canvas_interacted)
+    {
+        soundtrack.current.Play();
+        Player.canvas_interacted = true;
+    }
 }
 canvas.addEventListener("click", handleClick);
 canvas.addEventListener("touchend", handleClick);

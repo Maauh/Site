@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: 22-Out-2018 às 18:01
--- Versão do servidor: 10.2.12-MariaDB
--- PHP Version: 7.0.26
+-- Host: 127.0.0.1
+-- Generation Time: 22-Out-2018 às 23:17
+-- Versão do servidor: 10.1.36-MariaDB
+-- versão do PHP: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `id7472579_dados`
+-- Database: `dados`
 --
 
 -- --------------------------------------------------------
@@ -30,11 +30,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `historia` (
   `ID` int(11) NOT NULL,
-  `TITULO` text DEFAULT NULL,
-  `IMGURL` text DEFAULT NULL,
-  `DESCR` text DEFAULT NULL,
+  `TITULO` text,
+  `IMGURL` text,
+  `DESCR` text,
   `DAT` datetime DEFAULT NULL,
-  `POSTTYPE` text DEFAULT NULL
+  `POSTTYPE` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -42,25 +42,26 @@ CREATE TABLE `historia` (
 --
 
 INSERT INTO `historia` (`ID`, `TITULO`, `IMGURL`, `DESCR`, `DAT`, `POSTTYPE`) VALUES
-(1, 'A primeira frustração a gente nunca esquece', 'imagem/historia/Primeira_arma.jpg', 'A esperança de fazer uma arma que utilizasse da energia potencial elástica, de maneira similar à empregada neste brinquedo, foi frustrada por Belizário em uma de suas passagens mais icônicas: “Sua arma precisa ser recolhida em 15 segundos!”', '2018-10-19 11:42:00', 'img'),
-(2, 'O rascunho da conquista', 'imagem/historia/Cortar.jpg', 'Praticamente os construtores das pirâmides de Gizé. Será que elas também foram rascunhadas de alguma maneira? Fica aí a reflexão...', '2018-10-19 11:43:00', 'img'),
-(3, 'Tantas opções', 'imagem/historia/Tantas_opcoes.jpg', 'Eram tantas opções... Tamanhos, modelos, a indecisão tomou conta do grupo. Foram realizados tantos cálculos nesse dia que todos saímos com as cabeças doendo. Pode ter certeza que o professor de cálculo ficaria orgulhoso de todo o progresso feito naquele dia.', '2018-10-19 11:44:00', 'img'),
-(4, 'Lição do dia', 'imagem/historia/Protoboard.jpg', 'É... A protoboard não é uma boa maneira de construir circuitos com tantos jumpers... Aprendemos da pior maneira.', '2018-10-19 11:45:00', 'img'),
-(5, 'Wall-E no oitavo mês de gestação', 'imagem/historia/Ultrassom.jpg', 'A emoção de uma mãe ao ver o ultrassom de seu feto... foi isso que sentimos nesse dia. Nossas mãos eram seu útero.', '2018-10-19 11:47:00', 'img'),
-(6, 'Wall-E em seus primeiros meses de vida', 'imagem/historia/Vivo.jpg', 'Como qualquer criança de sua idade, dando seus primeiros passos pelo mundo. Por favor, não repare na falta de fraldas. Eles crescem tão rápido, não é mesmo?', '2018-10-19 11:48:00', 'img'),
-(7, 'Wall-E na adolescência', 'imagem/historia/Adolescente.jpg', 'Como qualquer pessoa nessa idade, ele passou por diversas fases, uma delas sendo essa relatada na foto. Raspou a cabeça e começou a treinar duro para suas futuras batalhas. Um verdadeiro monge Shaolin.', '2018-10-19 11:50:00', 'img'),
-(8, 'Chegou o grande dia', 'imagem/historia/O_Dia.jpg', 'Todos os momentos vividos pelo grupo culminam neste. O tão aguardado grande dia da competição havia chegado... A ansiedade dos membros do grupo nesse dia é inesquecível, assim como o próprio dia como um todo.', '2018-10-19 11:59:00', 'img'),
-(9, 'Calma, garoto', 'imagem/historia/Teste.jpg', 'É só um teste, não tem necessidade de agressão...', '2018-10-19 12:00:00', 'img'),
-(10, 'Nas mãos do pai', 'imagem/historia/Pai.jpg', 'Wall-E visto nas mãos de seu pai, mais conhecido como \"drift king\". Se você estava lá, sabe a razão de tal nomenclatura. Se não estava, acredite: foi de tirar o fôlego, o coração quase sai pela garganta.', '2018-10-19 12:03:00', 'img'),
-(11, '\"A paciência é a maior virtude\"', 'imagem/historia/Paciente.jpg', 'Já diziam os sábios. A maior das virtudes aprendidas por Wall-E na sua jornada para se tornar um monge Shaolin foi a paciência. É... Esse era mesmo um dia em que tudo seria testado até o limite, até mesmo isso.', '2018-10-19 12:06:00', 'img'),
-(12, 'Galvão Bueno perderia a voz', 'https://www.youtube.com/embed/z09wQ2_jDLA', 'Você acha que as partidas de <del>briga de galo</del> UFC são interessantes? Lutas de espada da era medieval? Ou talvez uma guerra mundial seja emocionante pra você? Se você respondeu sim para alguma das três perguntas, você claramente não conhece a RoboCup <del>ou conhece, não sei</del>.', '2018-10-19 12:29:00', 'iframe'),
-(13, 'Vamos com calma galera...', 'imagem/historia/robov.jpeg', 'E esse era o robô que nós todos pensamos que iamos montar, no dia em que o Belizário apresentou o projeto da matéria de Sensores e circuitos digitais.\r\n<a href=\"http://pacificrim.wikia.com/wiki/File:Gipsy_Danger_Blueprints.jpg\"> Fonte.</a>\r\n\r\n01/03/2018 23:58', '2018-10-21 19:28:07', 'img'),
-(14, 'Aquele suporte honrado', 'imagem/historia/vareta.jpeg', 'E quem disse que não valeu a pena tomar aquela chuva no dia 14/04/2018 para comprar o suporte que nos levaria à vitória...\r\n<br>\r\nEDIT: É... não nos levou à vitória, mas, fomos à final no NEXT!!! ', '2018-10-21 19:52:55', 'img'),
-(15, 'Tracionando o MITO', 'imagem/historia/drift.jpeg', 'Sabe aquele momento em que as montadoras de carros esportivos estão fazendo aquele projeto de tração 4x4 estilo Lancer Rally Art e Subaru? Então, nesse exato momento em nosos lab rooms, estávamos pensando na tração ideal para atingirmos o melhor resultado nas <del>ruas</del> \r\n pistas da FIAP.\r\n<br><br>\r\n-DK        mais conhecido com DRIFT KING.\r\n\r\n<br>\r\n28/03/2018   15:59', '2018-10-21 20:11:15', 'img'),
-(16, 'Soldador do Tatuapé', 'imagem/historia/lus.jpeg', 'E nesse longo projeto, alguns de nós até aprendemos a soldar, e olha... que soldas perfeitas foram essas, mesmo com todos os impactos e batidas nas <del>RUAS</del> arenas da FIAP, elas estão firmes e fortes até hoje.\r\n\r\n<br>\r\n18/09/2018  22:21', '2018-10-21 20:30:18', 'img'),
-(17, 'Já ouviu falar do Gandalf, o Cinzento?', 'imagem/historia/metal.png', 'Digo... Wall-E, o Cinzento, no início ele era assim, meio sério demais para com os seus desenvolvedores, logo seus <del>neurônios</del> circuitos e chips foram infectados por nosso movimento <del>Walter RED and White</del> e ele ficou <del>com raiva</del>, digo... vermelho... \r\n<br>', '2018-10-21 22:11:11', 'img'),
-(18, 'Cara, estou com a cabeça a mil...', 'imagem/historia/cabeca.png', 'Relatos de um Wall-E:\r\n<p>Aqui meus pais me ensinavam como dar meus primeiros passos... E cara, como foi emociante aprender a andar, rodar <del>e fazer uns drifts</del>, nunca vou me esquecer de cada gesto que vocês me ensinaram, como me defender usando apenas <del> uma agulha</del> meus braços e tantas outras coisas, obrigado por me fazer sentir vivo, essa sensação é maravilhosa!!!</p>\r\n\r\n<p>-Wall-E.</p>', '2018-10-21 22:36:13', 'img'),
-(19, 'Coloca na balança o que pra você tem mais valor...', 'imagem/historia/balanca.png', 'Aquele momento que um pai nunca se esquece, assistir ao parto de um filho é algo tão lindo... \r\n<br>\r\nWall-E, nasceu saudável, bonito e pesando exatamente 394g...\r\n\r\n<br>\r\n05/04/2018     11:43\r\n\r\n', '2018-10-22 00:01:40', 'img');
+(1, 'A primeira frustração a gente nunca esquece', 'imagem/historia/Primeira_arma.jpg', 'A esperança de fazer uma arma que utilizasse da energia potencial elástica, de maneira similar à empregada neste brinquedo, foi frustrada por Belizário em uma de suas passagens mais icônicas: “Sua arma precisa ser recolhida em 15 segundos!”', '2018-03-09 00:53:00', 'img'),
+(2, 'O rascunho da conquista', 'imagem/historia/Cortar.jpg', 'Praticamente os construtores das pirâmides de Gizé. Será que elas também foram rascunhadas de alguma maneira? Fica aí a reflexão...', '2018-08-08 19:52:00', 'img'),
+(3, 'Tantas opções', 'imagem/historia/Tantas_opcoes.jpg', 'Eram tantas opções... Tamanhos, modelos, a indecisão tomou conta do grupo. Foram realizados tantos cálculos nesse dia que todos saímos com as cabeças doendo. Pode ter certeza que o professor de cálculo ficaria orgulhoso de todo o progresso feito naquele dia.', '2018-03-22 11:08:00', 'img'),
+(4, 'Lição do dia', 'imagem/historia/Protoboard.jpg', 'É... A protoboard não é uma boa maneira de construir circuitos com tantos jumpers... Aprendemos da pior maneira.', '2018-03-21 17:50:00', 'img'),
+(5, 'Wall-E no oitavo mês de gestação', 'imagem/historia/Ultrassom.jpg', 'A emoção de uma mãe ao ver o ultrassom de seu feto... foi isso que sentimos nesse dia. Nossas mãos eram seu útero.', '2018-03-27 11:01:00', 'img'),
+(6, 'Wall-E em seus primeiros meses de vida', 'imagem/historia/Vivo.jpg', 'Como qualquer criança de sua idade, dando seus primeiros passos pelo mundo. Por favor, não repare na falta de fraldas. Eles crescem tão rápido, não é mesmo?', '2018-05-02 22:57:00', 'img'),
+(7, 'Wall-E na adolescência', 'imagem/historia/Adolescente.jpg', 'Como qualquer pessoa nessa idade, ele passou por diversas fases, uma delas sendo essa relatada na foto. Raspou a cabeça e começou a treinar duro para suas futuras batalhas. Um verdadeiro monge Shaolin.', '2018-09-12 18:33:00', 'img'),
+(8, 'Chegou o grande dia', 'imagem/historia/O_Dia.jpg', 'Todos os momentos vividos pelo grupo culminam neste. O tão aguardado grande dia da competição havia chegado... A ansiedade dos membros do grupo nesse dia é inesquecível, assim como o próprio dia como um todo.', '2018-10-08 20:24:00', 'img'),
+(9, 'Calma, garoto', 'imagem/historia/Teste.jpg', 'É só um teste, não tem necessidade de agressão...\r\n', '2018-10-09 22:12:00', 'img'),
+(10, 'Nas mãos do pai', 'imagem/historia/Pai.jpg', 'Wall-E visto nas mãos de seu pai, mais conhecido como \"drift king\". Se você estava lá, sabe a razão de tal nomenclatura. Se não estava, acredite: foi de tirar o fôlego, o coração quase sai pela garganta.', '2018-10-09 21:47:00', 'img'),
+(11, '\"A paciência é a maior virtude\"', 'imagem/historia/Paciente.jpg', 'Já diziam os sábios. A maior das virtudes aprendidas por Wall-E na sua jornada para se tornar um monge Shaolin foi a paciência. É... Esse era mesmo um dia em que tudo seria testado até o limite, até mesmo isso.', '2018-10-09 21:41:00', 'img'),
+(12, 'Galvão Bueno perderia a voz', 'https://www.youtube.com/embed/z09wQ2_jDLA', 'Você acha que as partidas de <del>briga de galo</del> UFC são interessantes? Lutas de espada da era medieval? Ou talvez uma guerra mundial seja emocionante pra você? Se você respondeu sim para alguma das três perguntas, você claramente não conhece a RoboCup <del>ou conhece, não sei</del>.', '2018-09-10 20:10:27', 'iframe'),
+(27, 'Vamos com calma galera...', 'imagem/historia/robov.jpeg', 'E esse era o robô que nós todos pensamos que iamos montar, no dia em que o Belizário apresentou o projeto da matéria de Sensores e circuitos digitais.\r\n<a href=\"http://pacificrim.wikia.com/wiki/File:Gipsy_Danger_Blueprints.jpg\"> Fonte.</a>', '2018-03-01 23:58:07', 'img'),
+(28, 'Aquele suporte honrado', 'imagem/historia/vareta.jpeg', 'E quem disse que não valeu a pena tomar aquela chuva no dia 14/04/2018 para comprar o suporte que nos levaria à vitória...\r\n<br>\r\nEDIT: É... não nos levou à vitória, mas, fomos à final no NEXT!!!', '2018-04-14 15:32:55', 'img'),
+(29, 'Tracionando o MITO', 'imagem/historia/drift.jpeg', 'Sabe aquele momento em que as montadoras de carros esportivos estão fazendo aquele projeto de tração 4x4 estilo Lancer Rally Art e Subaru? Então, nesse exato momento em nosos lab rooms, estávamos pensando na tração ideal para atingirmos o melhor resultado nas <del>ruas</del> \r\n pistas da FIAP.\r\n<br><br>\r\n-DK        mais conhecido com DRIFT KING.', '2018-03-28 15:59:15', 'img'),
+(30, 'Soldador do Tatuapé', 'imagem/historia/lus.jpeg', 'E nesse longo projeto, alguns de nós até aprendemos a soldar, e olha... que soldas perfeitas foram essas, mesmo com todos os impactos e batidas nas <del>RUAS</del> arenas da FIAP, elas estão firmes e fortes até hoje.', '2018-09-18 22:21:18', 'img'),
+(31, 'Já ouviu falar do Gandalf, o Cinzento?', 'imagem/historia/metal.png', 'Digo... Wall-E, o Cinzento, no início ele era assim, meio sério demais para com os seus desenvolvedores, logo seus <del>neurônios</del> circuitos e chips foram infectados por nosso movimento <del>Walter RED and White</del> e ele ficou <del>com raiva</del>, digo... vermelho...', '2018-08-30 12:57:11', 'img'),
+(32, 'Cara, estou com a cabeça a mil...', 'imagem/historia/cabeca.png', 'Relatos de um Wall-E:\r\n<p>Aqui meus pais me ensinavam como dar meus primeiros passos... E cara, como foi emociante aprender a andar, rodar <del>e fazer uns drifts</del>, nunca vou me esquecer de cada gesto que vocês me ensinaram, como me defender usando apenas <del> uma agulha</del> meus braços e tantas outras coisas, obrigado por me fazer sentir vivo, essa sensação é maravilhosa!!!</p>\r\n\r\n<p>-Wall-E.</p>', '2018-05-04 23:49:13', 'img'),
+(33, 'Coloca na balança o que pra ti tem mais valor...', 'imagem/historia/balanca.png', 'Aquele momento que um pai nunca se esquece, assistir ao parto de um filho é algo tão lindo... \r\n<br>\r\nWall-E, nasceu saudável, bonito e pesando exatamente 394g...\r\n\r\n', '2018-04-05 11:43:40', 'img'),
+(34, 'O bonde formou', 'imagem/historia/Nos.png', 'Da esquerda para a direita: um dungeon master que cria narrativas de deixar de Machado de Assis a George R. R. Martin de queixo caído, um gerente de vendas erudito em calçados capaz de escrever uma enciclopédia de 1250 páginas sobre os mais variados tipos de pisantes e convencer um paraplégico a comprar um par de tênis para usar nas mãos, um motorista habilidoso o suficiente para deixar Michael Schumacher comendo poeira e fazer baliza com drift em plena 25 de março, um nerd que usa os horários de almoço do trabalho para estudar, surpreendentemente não usa óculos, mas para compensar anda mais torto que o corcunda de Notre-Dame e um jovem programador prodígio que prefere usar suas fantásticas habilidades para a criação de trapaças para joguinhos eletrônicos. Uma equipe dessas poderia dar errado? Não responda!', '2018-10-09 20:32:09', 'img');
 
 -- --------------------------------------------------------
 
@@ -70,11 +71,11 @@ INSERT INTO `historia` (`ID`, `TITULO`, `IMGURL`, `DESCR`, `DAT`, `POSTTYPE`) VA
 
 CREATE TABLE `index` (
   `ID` int(11) NOT NULL,
-  `TITULO` text DEFAULT NULL,
-  `IMGURL` text DEFAULT NULL,
-  `DESCR` text DEFAULT NULL,
+  `TITULO` text,
+  `IMGURL` text,
+  `DESCR` text,
   `DAT` datetime DEFAULT NULL,
-  `POSTTYPE` text DEFAULT NULL
+  `POSTTYPE` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -93,11 +94,11 @@ INSERT INTO `index` (`ID`, `TITULO`, `IMGURL`, `DESCR`, `DAT`, `POSTTYPE`) VALUE
 
 CREATE TABLE `next` (
   `ID` int(11) NOT NULL,
-  `TITULO` text DEFAULT NULL,
-  `IMGURL` text DEFAULT NULL,
-  `DESCR` text DEFAULT NULL,
+  `TITULO` text,
+  `IMGURL` text,
+  `DESCR` text,
   `DAT` datetime DEFAULT NULL,
-  `POSTTYPE` text DEFAULT NULL
+  `POSTTYPE` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -131,10 +132,10 @@ CREATE TABLE `usuarios` (
   `NOME` text NOT NULL,
   `USUARIO` text NOT NULL,
   `SENHA` text NOT NULL,
-  `INTEGRANTE` tinyint(1) NOT NULL DEFAULT 0,
-  `FBID` text DEFAULT NULL,
-  `DESCRICAO` text DEFAULT NULL,
-  `FUNCAO` text DEFAULT NULL
+  `INTEGRANTE` tinyint(1) NOT NULL DEFAULT '0',
+  `FBID` text,
+  `DESCRICAO` text,
+  `FUNCAO` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -185,7 +186,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `historia`
 --
 ALTER TABLE `historia`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `index`

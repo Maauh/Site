@@ -1,0 +1,23 @@
+Integrantes do grupo
+Lucas Tomaz Cantuária, RM: 79869
+Pedro Estevam Oliveira Fonseca, RM: 80193
+Gabriel Oliveira Magalhães, RM : 81178
+Mauricio Sideria Peres Junior, RM: 80163
+Gustavo Alex de Sousa Fernandes, RM: 81442
+
+usuários do site
+user: kmrbels, pass: 777
+user: admin, pass: password
+user: papitoti, pass: 123
+user: cthulhu, pass: 123
+user: maauh, pass: 123
+user: gugapower, pass: 123
+
+OBS:
+O site pode ser modificado caso o login seja efetuado na aba administração.
+A página dos integrantes pode ser modificada de modo passivo, editando o perfil de cada usuário.
+Também é possível existir usuários que não aparecem na página integrantes ex: admin.
+É possível criar novas contas na aba administração.
+
+link do site hospedado: https://siterobo2.000webhostapp.com/
+link para download do site: ...
