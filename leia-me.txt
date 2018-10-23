@@ -1,11 +1,11 @@
 Integrantes do grupo
-Lucas Tomaz Cantu·ria, RM: 79869
+Lucas Tomaz Cantu√°ria, RM: 79869
 Pedro Estevam Oliveira Fonseca, RM: 80193
-Gabriel Oliveira Magalh„es, RM : 81178
+Gabriel Oliveira Magalh√£es, RM : 81178
 Mauricio Sideria Peres Junior, RM: 80163
 Gustavo Alex de Sousa Fernandes, RM: 81442
 
-usu·rios do site
+usu√°rios do site
 user: kmrbels, pass: 777
 user: admin, pass: password
 user: papitoti, pass: 123
@@ -14,10 +14,12 @@ user: maauh, pass: 123
 user: gugapower, pass: 123
 
 OBS:
-O site pode ser modificado caso o login seja efetuado na aba administraÁ„o.
-A p·gina dos integrantes pode ser modificada de modo passivo, editando o perfil de cada usu·rio.
-TambÈm È possÌvel existir usu·rios que n„o aparecem na p·gina integrantes ex: admin.
-… possÌvel criar novas contas na aba administraÁ„o.
+O site pode ser modificado caso o login seja efetuado na aba administra√ß√£o.
+A p√°gina dos integrantes pode ser modificada de modo passivo, editando o perfil de cada usu√°rio.
+Tamb√©m √© poss√≠vel existir usu√°rios que n√£o aparecem na p√°gina integrantes ex: admin.
+√â poss√≠vel criar novas contas na aba administrac√£o.
 
+link do github do site: https://github.com/Maauh/Site
+link do github do jogo: https://github.com/kmrbolas/viruz_td
 link do site hospedado: https://siterobo2.000webhostapp.com/
 link para download do site: ...
